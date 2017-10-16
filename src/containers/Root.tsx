@@ -12,8 +12,7 @@ import {getPathPrefix} from '../core/env'
 
 interface RootProps {
   store: any,
-  history: any,
-  roleCode: number
+  history: any
 }
 
 class Root extends React.PureComponent<RootProps, any> {
@@ -21,7 +20,7 @@ class Root extends React.PureComponent<RootProps, any> {
     return (
       <Provider store={this.props.store}>
         <ConnectedRouter history={this.props.history}>
-          <Route path={getPathPrefix()} component={({match}) => <BigShellApp roleCode={this.props.roleCode} match={match}/>}/>
+          <Route path={getPathPrefix()} component={({match}) => <BigShellApp match={match}/>}/>
         </ConnectedRouter>
       </Provider>
     )
