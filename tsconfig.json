@@ -6,7 +6,9 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "target": "es6"
+    "target": "es6",
+    "noEmitHelpers": true,
+    "noEmitOnError": true
   },
   "include": [
     "./src/**/*"

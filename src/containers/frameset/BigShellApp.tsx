@@ -6,6 +6,10 @@ import {connect} from 'react-redux'
 import MessageManage from 'wj-appcore/message/'
 import {changeMessageStatus} from 'wj-appcore/message/message.action'
 
+import style from '../../css/app.scss'
+import Header from './Header'
+import Aside from './Aside'
+
 interface BigShellAppProps {
   message: any
   changeMessageStatus: any
@@ -17,18 +21,19 @@ interface BigShellAppProps {
 class BigShellApp extends React.Component<BigShellAppProps> {
   render() {
     return (
-      <div className="app">
+      <div className={style['big-shell-app']}>
         <MessageManage
           messageList={this.props.message.msgQueue}
-          changeMessageStatus={this.props.changeMessageStatus}/>
-        xdf
+          changeMessageStatus={this.props.changeMessageStatus}
+        />
+        <Header></Header>
+        <Aside></Aside>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   let currentPath = state.router.location.pathname
   return {
     ...state['app'],

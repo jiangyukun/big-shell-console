@@ -1,0 +1,96 @@
+@media (min-width: 768px) {
+    .navbar-side {
+        width: 260px;
+        z-index: 1;
+    }
+}
+
+.navbar-default {
+    border: 0 solid black;
+}
+
+.navbar-side {
+    border: none;
+    background: #3E3E3E;
+}
+
+.navbar-side {
+    z-index: 1;
+    position: fixed;
+    width: 260px;
+    top: 80px;
+}
+
+.navbar-side {
+    z-index: 0;
+}
+
+.sidebar-collapse, .sidebar-collapse .nav {
+    background: #fff;
+}
+
+// ======
+
+ul.unstyled, ol.unstyled {
+    margin-left: 0;
+    list-style: none;
+}
+
+.widget-menu {
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+
+    li {
+        line-height: 20px;
+    }
+}
+
+.widget-menu > li > a {
+    background-color: #2d2b32;
+    color: #767676;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.widget-menu a {
+    color: #555;
+    display: block;
+    line-height: 20px;
+    padding: 15px;
+    text-decoration: none !important;
+}
+
+.widget-menu > li > a:hover {
+    background-color: #28262c;
+    color: #fafafa;
+}
+
+.collapse.in {
+    height: auto;
+}
+
+ul.unstyled, ol.unstyled {
+    margin-left: 0;
+    list-style: none;
+}
+
+.collapse {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+
+.widget-menu > li ul li {
+    background: rgb(238, 238, 238);
+    border-top: 1px solid rgb(204, 204, 204);
+
+    a {
+        padding: 10px 15px 10px 30px;
+    }
+}
+

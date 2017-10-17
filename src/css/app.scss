@@ -1,0 +1,63 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.big-shell-app {
+
+}
+
+.top-navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 300;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+
+    .navbar-brand {
+        color: #fff;
+        width: 260px;
+        text-align: left;
+        height: 60px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+        background: #F36A5A;
+    }
+
+    .nav > li {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 20px;
+        color: #FFFFFF;
+        margin: 0;
+    }
+}
+
+.sideNav {
+    float: left;
+    left: 0;
+    z-index: 3;
+    color: #868686;
+    cursor: pointer;
+    border-radius: 0;
+    width: 14px;
+    font-size: 48px;
+    line-height: 0;
+    margin: 7px 0 0 20px;
+}
+
+.top-navbar .nav > li > a > i {
+    margin-right: 2px;
+}
+
+.nav > li > a > i {
+    margin-right: 10px;
+    color: rgb(243, 106, 90);
+}
