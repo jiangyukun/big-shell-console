@@ -9,6 +9,7 @@ import {changeMessageStatus} from 'wj-appcore/message/message.action'
 import style from '../../css/app.scss'
 import Header from './Header'
 import Aside from './Aside'
+import Content from './Content'
 
 interface BigShellAppProps {
   message: any
@@ -28,6 +29,7 @@ class BigShellApp extends React.Component<BigShellAppProps> {
         />
         <Header></Header>
         <Aside></Aside>
+        <Content match={this.props.match}></Content>
       </div>
     )
   }

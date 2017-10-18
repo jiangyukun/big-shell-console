@@ -1,0 +1,45 @@
+.query-filter {
+    color: #777;
+    padding: 10px 10px 7px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    .filter-item-container {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 7px;
+        margin-right: 15px;
+
+        &.middle {
+            width: 350px;
+        }
+
+        .filter-items {
+            flex: 1;
+
+            .filter-item {
+                display: inline-block;
+                cursor: pointer;
+                padding: 2px 3px;
+                margin-right: 12px;
+                &.selected {
+                    background: #2b77e5;
+                    color: #fff;
+                    border-radius: 2px;
+                }
+                &.filter-select-item {
+                    width: 150px;
+                }
+            }
+        }
+    }
+
+    .filter-item-label {
+        label {
+            min-width: 70px;
+            display: block;
+        }
+
+    }
+}
