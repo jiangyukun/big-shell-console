@@ -14,7 +14,7 @@ type MenuGroupState = {
 
 class MenuGroup extends React.Component<MenuGroupProps, MenuGroupState> {
   state = {
-    isOpen: false
+    isOpen: true
   }
 
   handleClick = () => {
@@ -25,12 +25,12 @@ class MenuGroup extends React.Component<MenuGroupProps, MenuGroupState> {
 
   render() {
     return (
-        <li onClick={this.handleClick}>
-          {this.props.title}
-          <Collapse in={this.state.isOpen}>
-            {this.props.children}
-          </Collapse>
-        </li>
+      <li onClick={this.handleClick}>
+        {this.props.title}
+        <Collapse in={this.state.isOpen}>
+          {this.props.children}
+        </Collapse>
+      </li>
     )
   }
 }

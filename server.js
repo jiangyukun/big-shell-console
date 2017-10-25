@@ -6,7 +6,7 @@ const config = require('./webpack.dev')
 const express = require('express')
 
 const app = new express()
-const port = 3062
+const port = 3061
 
 const compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}))

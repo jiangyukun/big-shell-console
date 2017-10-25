@@ -14,13 +14,10 @@ class Header extends React.Component<HeaderProps> {
         <div className="navbar-header">
           <a className="navbar-brand">
             <strong>
-              <i className="icon fa fa-plane"></i>
-              CONSOLE
+              大贝壳控制台
             </strong>
           </a>
-          <div className="sideNav">
-            <i className="fa fa-bars icon"></i>
-          </div>
+
         </div>
         <ul className="nav navbar-top-links navbar-right">
           <li className="dropdown">

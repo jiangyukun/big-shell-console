@@ -3,7 +3,6 @@
  */
 import React from 'react'
 
-
 import FilterItem from '../../components/query-filter/FilterItem'
 import FilterOptions from '../../components/query-filter/FilterOptions'
 
