@@ -30,25 +30,25 @@
   &-placement-top,
   &-placement-topLeft,
   &-placement-topRight {
-    padding-bottom: @popover-distance;
+    padding-bottom: @popover-arrow-width;
   }
 
   &-placement-right,
   &-placement-rightTop,
   &-placement-rightBottom {
-    padding-left: @popover-distance;
+    padding-left: @popover-arrow-width;
   }
 
   &-placement-bottom,
   &-placement-bottomLeft,
   &-placement-bottomRight {
-    padding-top: @popover-distance;
+    padding-top: @popover-arrow-width;
   }
 
   &-placement-left,
   &-placement-leftTop,
   &-placement-leftBottom {
-    padding-right: @popover-distance;
+    padding-right: @popover-arrow-width;
   }
 
   &-inner {
@@ -65,19 +65,19 @@
     line-height: 32px;
     height: 32px;
     border-bottom: 1px solid @border-color-split;
-    color: @popover-color;
+    color: @heading-color;
     font-weight: 500;
   }
 
   &-inner-content {
     padding: 8px 16px;
-    color: @popover-color;
+    color: @text-color;
   }
 
   &-message {
     padding: 8px 0 16px;
     font-size: @font-size-base;
-    color: @popover-color;
+    color: @text-color;
     > .@{iconfont-css-prefix} {
       color: @warning-color;
       line-height: 17px;
@@ -125,7 +125,7 @@
   &-placement-topRight > &-content >  &-arrow {
     border-bottom-width: 0;
     border-top-color: @popover-arrow-outer-color;
-    bottom: @popover-distance - @popover-arrow-outer-width;
+    bottom: -1px;
     &:after {
       content: " ";
       bottom: 1px;
@@ -148,7 +148,7 @@
   &-placement-right > &-content >  &-arrow,
   &-placement-rightTop > &-content >  &-arrow,
   &-placement-rightBottom > &-content >  &-arrow {
-    left: @popover-distance - @popover-arrow-outer-width;
+    left: -1px;
     border-left-width: 0;
     border-right-color: @popover-arrow-outer-color;
     &:after {
@@ -175,7 +175,7 @@
   &-placement-bottomRight > &-content >  &-arrow {
     border-top-width: 0;
     border-bottom-color: @popover-arrow-outer-color;
-    top: @popover-distance - @popover-arrow-outer-width;
+    top: -1px;
     &:after {
       content: " ";
       top: 1px;
@@ -198,7 +198,7 @@
   &-placement-left > &-content >  &-arrow,
   &-placement-leftTop > &-content >  &-arrow,
   &-placement-leftBottom > &-content >  &-arrow {
-    right: @popover-distance - @popover-arrow-outer-width;
+    right: -1px;
     border-right-width: 0;
     border-left-color: @popover-arrow-outer-color;
     &:after {

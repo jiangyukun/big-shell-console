@@ -1,0 +1,26 @@
+.page-count-nav {
+    .page {
+        padding: 10px 0 10px 0;
+        a, span {
+            display: inline-block;
+            transition: color 0.5s;
+            margin: 0 2px 0 6px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #666;
+
+            &.disabled {
+                color: #666 !important;
+                cursor: not-allowed !important;
+                background-color: #cccccc !important;
+            }
+        }
+        span, a:hover {
+            background: #4084d0;
+            color: #fff;
+        }
+    }
+
+}

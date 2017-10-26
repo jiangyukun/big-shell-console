@@ -4,10 +4,10 @@
   background-color: transparent;
   border: 0;
   height: 100%;
+  line-height: 100%;
   outline: 0;
   width: 43%;
   text-align: center;
-  vertical-align: top;
   .placeholder();
 
   &[disabled] {
@@ -17,9 +17,6 @@
 
 .@{calendar-prefix-cls}-range-picker-separator {
   color: @text-color-secondary;
-  position: absolute;
-  top: 50%;
-  margin-top: -10px;
 }
 
 .@{calendar-prefix-cls}-range {
@@ -133,7 +130,7 @@
     &:before {
       content: '';
       display: block;
-      background: @item-active-bg;
+      background: @primary-1;
       border-radius: 0;
       border: 0;
       position: absolute;
@@ -144,12 +141,23 @@
     }
   }
 
+  &-bottom {
+    text-align: right;
+
+    .@{calendar-prefix-cls}-footer-btn {
+      padding-right: 16px;
+    }
+  }
+
   // `div` for selector specificity
   div&-quick-selector {
+    display: block;
     text-align: left;
+    border-top: @border-width-base @border-style-base @border-color-split;
+    padding: 10.5px 10px;
 
     > a {
-      margin-right: 8px;
+      margin-right: 16px;
     }
   }
 
@@ -194,8 +202,17 @@
         }
       }
     }
+    .@{calendar-prefix-cls}-footer-btn {
+      padding: 9px 12px 9px 0;
+      display: block;
+      .clearfix;
+    }
+    .@{calendar-prefix-cls}-ok-btn {
+      position: static;
+      height: 22px;
+    }
     .@{calendar-prefix-cls}-footer .@{calendar-prefix-cls}-time-picker-btn {
-      margin-right: 8px;
+      margin-right: 12px;
     }
     .@{calendar-prefix-cls}-today-btn {
       margin: 8px 12px;

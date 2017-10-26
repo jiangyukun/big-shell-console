@@ -1,13 +1,5 @@
 @import "./normalize.less";
 
-// http://stackoverflow.com/a/13611748/3040605
-@font-face {
-  font-family: "Helvetica Neue For Number";
-  src: local("Helvetica Neue");
-  unicode-range: U+30-39;
-}
-
-/*
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); //  remove tap highlight color for mobile safari
@@ -17,20 +9,19 @@
 *:after {
   box-sizing: border-box;
 }
-*/
 
 // HTML & Body reset
-/*html, body {
+html, body {
   .square(100%);
-}*/
+}
 
-/*body {
+body {
   font-family: @font-family;
   font-size: @font-size-base;
   line-height: @line-height-base;
   color: @text-color;
   background-color: @body-background;
-}*/
+}
 
 // unify the setting of elements's margin and padding for browsers
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
@@ -59,12 +50,6 @@ input::-ms-clear, input::-ms-reveal {
 ::selection {
   background: @primary-color;
   color: #fff;
-}
-
-// Headers
-h1, h2, h3, h4, h5, h6 {
-  color: @heading-color;
-  font-weight: 500;
 }
 
 // Links
