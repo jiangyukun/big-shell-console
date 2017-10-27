@@ -4,72 +4,90 @@
     margin: 0;
 }
 
+html, body, #root {
+    height: 100%;
+}
+
 body {
     font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "Segoe UI", Roboto,
+    "PingFang SC", "Hiragino Sans GB", SimSun, "Microsoft YaHei", sans-serif;
 }
 
 .big-shell-app {
-
+    height: 100%;
 }
 
-.top-navbar {
-    position: fixed;
-    width: 100%;
-    z-index: 300;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
-
-    .navbar-brand {
-        width: 260px;
-        text-align: left;
-        height: 60px;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 30px;
-        color: #5e5e5e;
-    }
-
-    .nav > li {
-        position: relative;
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-    }
-    .nav > li > a {
-        position: relative;
-        display: block;
-        padding: 20px;
-        color: #FFFFFF;
-        margin: 0;
-    }
-}
-
-.sideNav {
+.app-left {
+    height: 100%;
     float: left;
-    left: 0;
-    z-index: 3;
-    color: #868686;
-    cursor: pointer;
-    border-radius: 0;
-    width: 14px;
-    font-size: 48px;
-    line-height: 0;
-    margin: 7px 0 0 20px;
+    width: 200px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+
+    .app-user {
+        font-size: 14px;
+        color: #F7FAFF;
+        background: #343C47;
+        height: 60px;
+        padding-left: 20px;
+
+        .user-name {
+            line-height: 60px;
+            display: inline-block;
+            border-top: 3px solid #32ACEF;
+            cursor: pointer;
+        }
+    }
+    .app-nav {
+        flex: 1;
+        background: #2B343D;
+        padding-top: 15px;
+    }
+    .app-nav-menu {
+        color: #8C959E;
+        padding: 0 0 0 15px;
+
+        .menu-title {
+            cursor: pointer;
+            padding: 10px 0;
+            img {
+                vertical-align: middle;
+                height: 17px;
+                margin-right: 7px;
+            }
+        }
+        &.open {
+            background: #222933;
+            color: #fff;
+            border-left: 3px solid #32ACEF;
+        }
+    }
+    .app-sub-menu {
+        background: #222933;
+        color: #8C959E;
+        padding: 7px 0;
+        cursor: pointer;
+        &:hover {
+            color: #fff;
+        }
+    }
 }
 
-.top-navbar .nav > li > a > i {
-    margin-right: 2px;
-}
+.app-right {
+    margin-left: 200px;
+    height: 100%;
+    overflow: hidden;
 
-.nav > li > a > i {
-    margin-right: 10px;
-    color: rgb(243, 106, 90);
-}
+    .page-content {
+        height: 100%;
+        overflow: hidden;
+    }
 
-.page-content {
-    position: fixed;
-    top: 60px;
-    left: 260px;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
+    .app-function-page {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 }

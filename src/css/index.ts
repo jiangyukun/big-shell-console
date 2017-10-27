@@ -9,7 +9,7 @@ import './antd/table/style/index'
 import 'wj-appcore/style/index.scss'
 
 import './app.scss'
-import './aside.scss'
+// import './aside.scss'
 import './page-common.scss'
 
 import './components/query-filter.scss'
