@@ -25,7 +25,8 @@ class Item extends React.Component<any> {
 class FixHead extends React.Component<any> {
   static Item = Item
   static contextTypes = {
-    weights: PropTypes.array
+    weights: PropTypes.array,
+    bodyWidth: PropTypes.number
   }
 
   render() {
@@ -45,7 +46,7 @@ class FixHead extends React.Component<any> {
 
     return (
       <div>
-        <ul className="head-container">
+        <ul className="head-container" style={{width: this.context.bodyWidth}}>
           {childrenWithWidth}
         </ul>
       </div>

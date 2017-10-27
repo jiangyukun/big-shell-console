@@ -7,8 +7,6 @@ import MessageManage from 'wj-appcore/message/'
 import {changeMessageStatus} from 'wj-appcore/message/message.action'
 
 import Left from './Left'
-import Aside from './Aside'
-import Content from './Content'
 import Right from './Right'
 
 interface BigShellAppProps {
@@ -28,10 +26,8 @@ class BigShellApp extends React.Component<BigShellAppProps> {
           changeMessageStatus={this.props.changeMessageStatus}
         />
 
-        <Left></Left>
+        <Left currentPath={this.props.currentPath}></Left>
         <Right match={this.props.match}></Right>
-        {/*<Aside></Aside>*/}
-        {/**/}
       </div>
     )
   }

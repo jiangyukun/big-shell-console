@@ -15,7 +15,16 @@ class FixHeadList extends React.Component<FixHeadListProps> {
   }
   static childContextTypes = {
     weights: PropTypes.array,
-    total: PropTypes.number
+    total: PropTypes.number,
+    onLayoutUpdate: PropTypes.func,
+    bodyWidth: PropTypes.number
+  }
+  state = {
+    bodyWidth: 0
+  }
+
+  onLayoutUpdate = (width) => {
+    this.setState({bodyWidth: width})
   }
 
   render() {
@@ -29,7 +38,9 @@ class FixHeadList extends React.Component<FixHeadListProps> {
   getChildContext() {
     return {
       weights: this.props.weights,
-      total: this.props.total
+      total: this.props.total,
+      onLayoutUpdate: this.onLayoutUpdate,
+      bodyWidth: this.state.bodyWidth
     }
   }
 }

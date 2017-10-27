@@ -3,14 +3,36 @@
  */
 import React from 'react'
 import classnames from 'classnames'
+import {Link} from 'react-router-dom'
+
+import {getPath} from '../../core/env'
+import {PAGES} from '../../core/constants/pages'
 
 interface LeftProps {
-
+  currentPath: string
 }
 
 class Left extends React.Component<LeftProps> {
+  url: any
   state = {
     open: true
+  }
+
+  componentWillMount() {
+    this.url = {
+      patientInfo: getPath(PAGES.PATIENT_INFO),
+      treatSituation: getPath(PAGES.TREAT_SITUATION),
+      laboratorySheet: getPath(PAGES.LABORATORY_SHEET),
+      followApply: getPath(PAGES.FOLLOW_APPLY),
+    }
+  }
+
+  isActive = (page) => {
+    return getPath(page) == this.props.currentPath
+  }
+
+  getSubMenuClass = (page) => {
+    return classnames('app-sub-menu', {active: this.isActive(page)})
   }
 
   render() {
@@ -31,10 +53,18 @@ class Left extends React.Component<LeftProps> {
             {
               this.state.open && (
                 <ul>
-                  <li className="app-sub-menu">患者信息</li>
-                  <li className="app-sub-menu">治疗情况</li>
-                  <li className="app-sub-menu">化验单</li>
-                  <li className="app-sub-menu">关注申请</li>
+                  <li className={this.getSubMenuClass(PAGES.PATIENT_INFO)}>
+                    <Link to={this.url.patientInfo}>患者信息</Link>
+                  </li>
+                  <li className={this.getSubMenuClass(PAGES.TREAT_SITUATION)}>
+                    <Link to={this.url.treatSituation}>治疗情况</Link>
+                  </li>
+                  <li className={this.getSubMenuClass(PAGES.LABORATORY_SHEET)}>
+                    <Link to={this.url.laboratorySheet}>化验单</Link>
+                  </li>
+                  <li className={this.getSubMenuClass(PAGES.FOLLOW_APPLY)}>
+                    <Link to={this.url.followApply}>关注申请</Link>
+                  </li>
                 </ul>
               )
             }

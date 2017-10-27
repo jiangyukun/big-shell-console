@@ -1,4 +1,3 @@
-
 * {
     padding: 0;
     margin: 0;
@@ -72,6 +71,16 @@ body {
         &:hover {
             color: #fff;
         }
+        &.active {
+            a {
+                color: #32ACEF;
+            }
+        }
+        a {
+            color: #8C959E;
+            display: block;
+            text-decoration: none;
+        }
     }
 }
 
@@ -89,5 +98,6 @@ body {
         height: 100%;
         display: flex;
         flex-direction: column;
+        background: #E6EBEF;
     }
 }

@@ -17,4 +17,10 @@ export const PATIENT_INFO = {
 
 }
 
+export const LABORATORY_SHEET = {
+  FETCH_LIST: null,
+
+}
+
 generatorValueFromKey('PATIENT_INFO', PATIENT_INFO)
+generatorValueFromKey('LABORATORY_SHEET', LABORATORY_SHEET)

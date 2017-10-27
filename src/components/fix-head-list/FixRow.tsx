@@ -28,9 +28,15 @@ interface FixRowProps extends React.HTMLProps<HTMLUListElement> {
 }
 
 class FixRow extends React.Component<FixRowProps> {
+  row: HTMLUListElement
   static Item = Item
   static contextTypes = {
-    weights: PropTypes.array
+    weights: PropTypes.array,
+    onLayoutUpdate: PropTypes.func
+  }
+
+  componentDidMount() {
+    this.context.onLayoutUpdate(this.row.clientWidth)
   }
 
   render() {
@@ -50,7 +56,7 @@ class FixRow extends React.Component<FixRowProps> {
 
     let {selected, ...otherProps} = this.props
     return (
-      <ul className={classnames('row-container', {'selected': selected})} {...otherProps}>
+      <ul className={classnames('row-container', {'selected': selected})} {...otherProps} ref={c => this.row = c}>
         {childrenWithWidth}
       </ul>
     )

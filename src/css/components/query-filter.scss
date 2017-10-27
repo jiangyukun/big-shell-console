@@ -1,9 +1,9 @@
 .query-filter {
+    background: #fff;
     color: #777;
     padding: 10px 10px 7px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin: 15px;
+    border-radius: 5px;
 
     .filter-item-container {
         display: inline-flex;
@@ -26,7 +26,7 @@
                 &.selected {
                     background: #2b77e5;
                     color: #fff;
-                    border-radius: 2px;
+                    border-radius: 3px;
                 }
                 &.filter-select-item {
                     width: 150px;

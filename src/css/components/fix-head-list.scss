@@ -1,13 +1,17 @@
 .fix-head-list {
+    background: #fff;
     flex: 1;
     overflow: auto;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
     .head-container {
         display: flex;
+        border-bottom: 1px solid #E7E7E9;
 
         .item {
-            background-color: #b9def0;
+            font-size: 13px;
+            background-color: #fff;
             padding: 10px 0 10px 10px;
             color: #666;
         }
@@ -28,6 +32,7 @@
         }
         .row-container {
             display: flex;
+            border-bottom: 1px solid #E7E7E9;
 
             .item {
                 overflow: hidden;
@@ -36,10 +41,10 @@
             }
 
             &:nth-of-type(odd) {
-                background-color: #eee;
+                //background-color: #eee;
             }
             &:nth-of-type(even) {
-                background-color: #fff;
+                //background-color: #fff;
             }
 
             &:hover {
