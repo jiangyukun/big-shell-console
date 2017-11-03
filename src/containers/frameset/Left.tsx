@@ -24,6 +24,10 @@ class Left extends React.Component<LeftProps> {
       treatSituation: getPath(PAGES.TREAT_SITUATION),
       laboratorySheet: getPath(PAGES.LABORATORY_SHEET),
       followApply: getPath(PAGES.FOLLOW_APPLY),
+      doctorAudit: getPath(PAGES.DOCTOR_AUDIT),
+      hospitalManage: getPath(PAGES.HOSPITAL_MANAGE),
+      clinicDate: getPath(PAGES.CLINIC_DATE),
+      doctorWallet: getPath(PAGES.DOCTOR_WALLET),
     }
   }
 
@@ -48,7 +52,6 @@ class Left extends React.Component<LeftProps> {
               患者管理
             </div>
             <div className="pull-right">
-
             </div>
             {
               this.state.open && (
@@ -69,6 +72,26 @@ class Left extends React.Component<LeftProps> {
               )
             }
 
+            <div className="menu-title">
+              <img src={require('./icon/doctor-menu.svg')}/>
+              医生管理
+            </div>
+            <div className="pull-right">
+            </div>
+            <ul>
+              <li className={this.getSubMenuClass(PAGES.DOCTOR_AUDIT)}>
+                <Link to={this.url.doctorAudit}>医生审核</Link>
+              </li>
+              <li className={this.getSubMenuClass(PAGES.HOSPITAL_MANAGE)}>
+                <Link to={this.url.hospitalManage}>医院管理</Link>
+              </li>
+              <li className={this.getSubMenuClass(PAGES.CLINIC_DATE)}>
+                <Link to={this.url.clinicDate}>门诊时间</Link>
+              </li>
+              <li className={this.getSubMenuClass(PAGES.DOCTOR_WALLET)}>
+                <Link to={this.url.doctorWallet}>医生钱包</Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
