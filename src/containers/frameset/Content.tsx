@@ -9,6 +9,7 @@ import PatientInfo from '../1-1-patient-info/PatientInfo'
 import LaboratorySheet from '../1-3-laboratory-sheet/LaboratorySheet'
 import DoctorAudit from '../2-1-doctor-audit/DoctorAudit'
 import HospitalManage from '../2-2-hospital-manage/HospitalManage'
+import QuestionsAndAnswers from '../3-1-questions-answers/QuestionsAndAnswers'
 
 interface ContentProps {
   match: any
@@ -16,7 +17,7 @@ interface ContentProps {
 
 class Content extends React.Component<ContentProps> {
   render() {
-    const {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, HOSPITAL_MANAGE} = PAGES
+    const {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, HOSPITAL_MANAGE, QUESTIONS_ANSWERS} = PAGES
     const {match} = this.props
 
     return (
@@ -25,6 +26,8 @@ class Content extends React.Component<ContentProps> {
         <Route path={`${match.url}/${LABORATORY_SHEET}`} component={LaboratorySheet}/>
         <Route path={`${match.url}/${DOCTOR_AUDIT}`} component={DoctorAudit}/>
         <Route path={`${match.url}/${HOSPITAL_MANAGE}`} component={HospitalManage}/>
+
+        <Route path={`${match.url}/${QUESTIONS_ANSWERS}`} component={QuestionsAndAnswers}/>
       </div>
     )
   }

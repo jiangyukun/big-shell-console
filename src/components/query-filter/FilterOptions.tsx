@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import classnames from 'classnames'
-import Select1 from 'wj-appcore/common/Select1'
+import Select1 from 'app-core/common/Select1'
 
 interface FilterOptionsProps {
   options: { value: string, text: string }[]
@@ -44,7 +44,7 @@ class FilterOptions extends React.Component<FilterOptionsProps> {
           (this.props.useSelect || options.length > 5) && (
             <li className="filter-select-item filter-item">
               <Select1 value={this.props.value}
-                       className={classnames({'selected': this.props.value != ''})}
+                       className={classnames('small', {'selected': this.props.value != ''})}
                        options={options}
                        onChange={value => this.props.onChange(value)}/>
             </li>

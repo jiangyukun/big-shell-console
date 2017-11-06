@@ -3,8 +3,8 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import MessageManage from 'wj-appcore/message/'
-import {changeMessageStatus} from 'wj-appcore/message/message.action'
+import MessageManage from 'app-core/message/'
+import {changeMessageStatus} from 'app-core/message/message.action'
 
 import Left from './Left'
 import Right from './Right'

@@ -13,6 +13,12 @@ body {
     "PingFang SC", "Hiragino Sans GB", SimSun, "Microsoft YaHei", sans-serif;
 }
 
+//覆盖bootstrap样式
+label {
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
 .big-shell-app {
     height: 100%;
 }
@@ -66,7 +72,7 @@ body {
     .app-sub-menu {
         background: #222933;
         color: #8C959E;
-        padding: 7px 0;
+        padding: 7px 0 7px 25px;
         cursor: pointer;
         &:hover {
             color: #fff;
@@ -88,9 +94,15 @@ body {
     margin-left: 200px;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .app-right-content {
+        height: 60px;
+    }
 
     .page-content {
-        height: 100%;
+        flex: 1;
         overflow: hidden;
     }
 

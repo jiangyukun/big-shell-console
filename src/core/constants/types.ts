@@ -27,6 +27,12 @@ export const DOCTOR_AUDIT = {
 
 }
 
+export const QUESTIONS_ANSWERS = {
+  FETCH_LIST: null,
+
+}
+
 generatorValueFromKey('PATIENT_INFO', PATIENT_INFO)
 generatorValueFromKey('LABORATORY_SHEET', LABORATORY_SHEET)
 generatorValueFromKey('DOCTOR_AUDIT', DOCTOR_AUDIT)
+generatorValueFromKey('QUESTIONS_ANSWERS', QUESTIONS_ANSWERS)

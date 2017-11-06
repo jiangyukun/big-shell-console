@@ -49,10 +49,10 @@ class PatientInfo extends React.Component<PatientInfoProps> {
     return (
       <div className="app-function-page">
         <div className="query-filter">
-          <FilterItem label="性别">
+          <FilterItem label="性别" size="big">
             <FilterOptions options={filters.sex} value={this.state.sex} onChange={v => this.setState({sex: v})}/>
           </FilterItem>
-          <FilterItem label="所在地区">
+          <FilterItem label="所在地区" size="big">
             <FilterOptions
               useSelect={true}
               options={filters.provinces} value={this.state.area} onChange={v => this.setState({area: v})}

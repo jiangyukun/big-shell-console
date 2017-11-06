@@ -15,6 +15,10 @@
             width: 350px;
         }
 
+        &.big {
+            width: 500px;
+        }
+
         .filter-items {
             flex: 1;
 
@@ -40,6 +44,5 @@
             min-width: 70px;
             display: block;
         }
-
     }
 }

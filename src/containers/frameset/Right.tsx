@@ -12,6 +12,7 @@ class Right extends React.Component<RightProps> {
   render() {
     return (
       <div className="app-right">
+        <div className="app-right-content"></div>
         <Content match={this.props.match}></Content>
       </div>
     )

@@ -46,7 +46,7 @@ class FixHead extends React.Component<any> {
 
     return (
       <div>
-        <ul className="head-container" style={{width: this.context.bodyWidth}}>
+        <ul className="head-container" style={{width: this.context.bodyWidth || 'auto'}}>
           {childrenWithWidth}
         </ul>
       </div>

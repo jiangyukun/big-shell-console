@@ -12,4 +12,6 @@ export const PAGES = {
   HOSPITAL_MANAGE: 'hospital-manage',
   CLINIC_DATE: 'clinic-date',
   DOCTOR_WALLET: 'doctor-wallet',
+
+  QUESTIONS_ANSWERS: 'questions-answers',
 }
