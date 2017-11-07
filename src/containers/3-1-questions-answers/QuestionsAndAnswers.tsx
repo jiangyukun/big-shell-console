@@ -12,6 +12,7 @@ import AppFunctionPage from '../../core/interface/AppFunctionPage'
 import {handleListData} from '../common/common-helper'
 import {fetchList} from './questions-answers.action'
 import Button from '../../components/button/Button'
+import OrderOperationRecordDialog from './dialog/OrderOperationRecordDialog'
 
 interface QuestionsAndAnswersProps extends AppFunctionPage {
   questionAnswerList: Data<any>
@@ -21,7 +22,8 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
   state = {
     searchKey: '',
     index: -1,
-    currentPage: 0
+    currentPage: 0,
+    showOrderRecord: true
   }
 
   toPage = (newPage?: number) => {
@@ -44,6 +46,14 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
 
     return (
       <div className="app-function-page">
+        {
+          this.state.showOrderRecord && (
+            <OrderOperationRecordDialog
+              onExited={() => this.setState({showOrderRecord: false})}
+            />
+          )
+        }
+
         <div className="toolbar">
           <Button>查看</Button>
           <Button>操作记录</Button>

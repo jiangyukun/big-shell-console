@@ -29,6 +29,7 @@ export const DOCTOR_AUDIT = {
 
 export const QUESTIONS_ANSWERS = {
   FETCH_LIST: null,
+  FETCH_ORDER_OPERATION_LIST: null,
 
 }
 

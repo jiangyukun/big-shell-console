@@ -19,3 +19,17 @@ export function fetchList(options) {
     }
   }
 }
+
+export function fetchOrderOperationList(start, options) {
+  return {
+    [THREE_PHASE]: {
+      type: QUESTIONS_ANSWERS.FETCH_ORDER_OPERATION_LIST,
+      startParam: {start},
+      http: () => _post(urlPrefix + '/v1/operate/record/list', {body: options}),
+      handleResponse: data => ({
+        list: data['list'],
+        total: data['totalCount']
+      })
+    }
+  }
+}

@@ -1,0 +1,16 @@
+
+.flex {
+    display: flex;
+
+    &.column {
+        flex-direction: column;
+    }
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.between {
+        justify-content: space-between;
+    }
+}
+

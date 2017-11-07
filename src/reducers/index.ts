@@ -7,6 +7,7 @@ import message from 'app-core/message/message.reducer'
 import {wrapReducerState} from 'app-core/tools/redux-utils'
 import data from './data.reducer'
 import {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, QUESTIONS_ANSWERS} from '../core/constants/types'
+import pageList from './page-list.reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   laboratorySheetList: wrapReducerState(data(LABORATORY_SHEET.FETCH_LIST)),
   doctorAuditList: wrapReducerState(data(DOCTOR_AUDIT.FETCH_LIST)),
   questionAnswerList: wrapReducerState(data(QUESTIONS_ANSWERS.FETCH_LIST)),
+  orderOperationList: wrapReducerState(pageList(QUESTIONS_ANSWERS.FETCH_ORDER_OPERATION_LIST)),
 })

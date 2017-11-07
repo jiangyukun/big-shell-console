@@ -25,6 +25,7 @@
   },
   "homepage": "",
   "dependencies": {
+    "app-core": "1.0.0",
     "antd": "2.12.2",
     "babel-polyfill": "6.23.0",
     "classnames": "2.2.5",
