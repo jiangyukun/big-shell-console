@@ -20,6 +20,16 @@ export function fetchList(options) {
   }
 }
 
+export function fetchOrderDetail(orderCode) {
+  return {
+    [THREE_PHASE]: {
+      type: QUESTIONS_ANSWERS.FETCH_ORDER_DETAIL,
+      http: () => _post(urlPrefix + `/v1/question/info/${orderCode}`),
+      handleResponse: data => data
+    }
+  }
+}
+
 export function fetchOrderOperationList(start, options) {
   return {
     [THREE_PHASE]: {

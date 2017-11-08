@@ -1,6 +1,6 @@
 
 .button {
-    padding: 7px 10px;
+    padding: 5px 12px;
     color: #fff;
     background: #108EE9;
     border: none;
@@ -18,8 +18,14 @@
         background-color: #3DB8C1;
     }
 
-    &~button {
-        margin-left: 5px;
+    &[disabled] {
+        cursor: not-allowed;
+        background: #c0c0c0;
+        color: #eee;
+    }
+
+    & ~ button {
+        margin-left: 10px;
     }
 }
 

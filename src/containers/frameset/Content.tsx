@@ -17,7 +17,7 @@ interface ContentProps {
 
 class Content extends React.Component<ContentProps> {
   render() {
-    const {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, HOSPITAL_MANAGE, QUESTIONS_ANSWERS} = PAGES
+    const {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, HOSPITAL_MANAGE, QA_ORDER} = PAGES
     const {match} = this.props
 
     return (
@@ -27,7 +27,7 @@ class Content extends React.Component<ContentProps> {
         <Route path={`${match.url}/${DOCTOR_AUDIT}`} component={DoctorAudit}/>
         <Route path={`${match.url}/${HOSPITAL_MANAGE}`} component={HospitalManage}/>
 
-        <Route path={`${match.url}/${QUESTIONS_ANSWERS}`} component={QuestionsAndAnswers}/>
+        <Route path={`${match.url}/${QA_ORDER}`} component={QuestionsAndAnswers}/>
       </div>
     )
   }

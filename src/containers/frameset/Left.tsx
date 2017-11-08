@@ -29,7 +29,7 @@ class Left extends React.Component<LeftProps> {
       clinicDate: getPath(PAGES.CLINIC_DATE),
       doctorWallet: getPath(PAGES.DOCTOR_WALLET),
 
-      questionAnswer: getPath(PAGES.QUESTIONS_ANSWERS),
+      qAOrder: getPath(PAGES.QA_ORDER),
     }
   }
 
@@ -99,8 +99,8 @@ class Left extends React.Component<LeftProps> {
             <div className="pull-right">
             </div>
             <ul>
-              <li className={this.getSubMenuClass(PAGES.QUESTIONS_ANSWERS)}>
-                <Link to={this.url.questionAnswer}>问答订单</Link>
+              <li className={this.getSubMenuClass(PAGES.QA_ORDER)}>
+                <Link to={this.url.qAOrder}>问答订单</Link>
               </li>
               <li className={this.getSubMenuClass(PAGES.HOSPITAL_MANAGE)}>
                 <Link to={this.url.hospitalManage}>电话咨询订单</Link>

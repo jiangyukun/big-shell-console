@@ -6,13 +6,14 @@ import {connect} from 'react-redux'
 
 import {FixHeadList, FixHead, FixBody, FixRow} from '../../components/fix-head-list/'
 import PageCountNav from '../../components/nav/PageCountNav'
+import Button from '../../components/button/Button'
+import OrderDetailDialog from './dialog/OrderDetailDialog'
+import OrderOperationRecordDialog from './dialog/OrderOperationRecordDialog'
 
 import Data from '../../core/interface/Data'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
 import {handleListData} from '../common/common-helper'
 import {fetchList} from './questions-answers.action'
-import Button from '../../components/button/Button'
-import OrderOperationRecordDialog from './dialog/OrderOperationRecordDialog'
 
 interface QuestionsAndAnswersProps extends AppFunctionPage {
   questionAnswerList: Data<any>
@@ -23,7 +24,8 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
     searchKey: '',
     index: -1,
     currentPage: 0,
-    showOrderRecord: true
+    showOrderRecord: false,
+    showOrderDetail: true
   }
 
   toPage = (newPage?: number) => {
@@ -43,6 +45,7 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
 
   render() {
     const {total, list, loading, loaded} = handleListData(this.props.questionAnswerList)
+    const item = list[this.state.index] || {}
 
     return (
       <div className="app-function-page">
@@ -53,10 +56,18 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
             />
           )
         }
+        {
+          this.state.showOrderDetail && (
+            <OrderDetailDialog
+              orderCode={item['question_order_code'] || '0117110002401'}
+              onExited={() => this.setState({showOrderDetail: false})}
+            />
+          )
+        }
 
         <div className="toolbar">
-          <Button>查看</Button>
-          <Button>操作记录</Button>
+          <Button disabled={this.state.index == -1} onClick={() => this.setState({showOrderDetail: true})}>查看</Button>
+          <Button onClick={() => this.setState({showOrderRecord: true})}>操作记录</Button>
         </div>
         <div className="list-wrap">
           <FixHeadList total={total}>

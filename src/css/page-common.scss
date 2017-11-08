@@ -1,5 +1,5 @@
 
-::-webkit-input-placeholder{
+::-webkit-input-placeholder {
     color: #cccccc;
 }
 
@@ -24,4 +24,8 @@
     display: inline-block;
     width: 120px;
     color: #aaa;
+
+    &.small {
+        width: 75px;
+    }
 }

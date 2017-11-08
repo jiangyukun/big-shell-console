@@ -1,0 +1,162 @@
+$border: 1px solid #eee;
+
+.qa-order-detail {
+    color: #000;
+    .detail-title {
+        color: #777;
+        border-bottom: $border;
+        padding-bottom: 10px;
+        img {
+            margin-right: 5px;
+            width: 20px;
+        }
+    }
+
+    .qa-basic-info {
+        border-bottom: 1px solid #000;
+        .user-basic-info {
+            border-bottom: $border;
+            padding-bottom: 10px;
+            img {
+                //vertical-align: text-top;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 100%;
+            }
+
+            .username, .nickname, .mobile {
+                padding-left: 20px;
+            }
+        }
+
+        .qa-content {
+            padding: 15px 0;
+            border-bottom: $border;
+            .qa-content-text {
+
+            }
+        }
+
+        .question-owner, .question-date-time {
+            padding: 10px 0;
+            label {
+                color: gray;
+                width: 80px;
+            }
+        }
+        .question-owner {
+            border-bottom: $border;
+        }
+
+    }
+
+    .payment-info {
+        padding: 10px 0;
+        border-bottom: 1px solid #000;
+
+        .payment-info-summary {
+            display: flex;
+            padding-top: 10px;
+            .summary-basic-info {
+                width: 250px;
+                img {
+                    margin-left: 5px;
+                    width: 14px;
+                }
+            }
+            .money-container {
+                display: flex;
+                align-items: center;
+                padding: 0 30px;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                .money-count {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .money-text {
+                    margin-top: 5px;
+                    color: #aaa;
+                }
+            }
+            .refund {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .refund-btn {
+                padding: 5px 20px;
+                border: 1px solid #007C00;
+                background: #fff;
+                border-radius: 5px;
+                color: #007C00;
+            }
+        }
+    }
+
+    .answer-info {
+        padding: 10px 0;
+        border-bottom: 1px solid #000;
+
+        .detail-title {
+            img {
+                width: 16px;
+                margin-right: 8px;
+            }
+        }
+
+        .answer-info-item {
+            display: flex;
+            padding-top: 10px;
+        }
+    }
+
+    .rate-info {
+        padding: 10px 0;
+        border-bottom: 1px solid #000;
+        .rate-info-item {
+            padding-top: 10px;
+            display: flex;
+            img {
+                vertical-align: sub;
+                width: 16px;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .appeal-info {
+        padding: 10px 0;
+        border-bottom: 1px solid #000;
+
+        .appeal-info-item {
+            padding: 7px 0;
+            display: flex;
+            img {
+                vertical-align: sub;
+                width: 16px;
+                margin-right: 5px;
+            }
+
+            &:not(:last-child) {
+                border-bottom: $border;
+            }
+        }
+        .modify-appeal-container {
+            width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            button {
+                padding: 5px 15px;
+                background: #fff;
+                border: 1px solid #aaa;
+                border-radius: 5px;
+            }
+        }
+
+    }
+}

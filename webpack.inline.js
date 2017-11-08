@@ -7,7 +7,8 @@ const port = 3061
 
 module.exports = {
   entry: [
-    './src/index.tsx'
+    'react-hot-loader/patch',
+    './src/index_dev.tsx'
   ],
   devServer: {
     hot: true,
@@ -36,13 +37,13 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/, loaders: ['babel-loader?cacheDirectory'],
+        test: /\.js$/, loaders: ['react-hot-loader/webpack', 'babel-loader?cacheDirectory'],
         exclude: handleModulePath.exclude,
         include: handleModulePath.include
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: ['babel-loader?cacheDirectory', 'awesome-typescript-loader?useCache']
+        loader: ['react-hot-loader/webpack', 'babel-loader?cacheDirectory', 'awesome-typescript-loader?useCache']
       },
       {test: /\.less$/, loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader', 'less-loader']},
       {test: /\.scss$/, loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader', 'sass-loader']},

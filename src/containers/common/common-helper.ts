@@ -26,3 +26,9 @@ export function handlePageListData(responseData: List<any>) {
 
   return {total, list, loading, loaded}
 }
+
+
+export function getTxt(txt) {
+  if (txt) return txt
+  return '暂无'
+}

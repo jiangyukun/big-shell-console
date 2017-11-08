@@ -11,9 +11,12 @@ import Confirm from 'app-core/common/Confirm'
 import FullDialogContent from 'app-core/common/content/FullDialogContent'
 
 import Label from '../../../components/element/Label'
-import {fetchOrderOperationList} from '../questions-answers.action'
+import Button from '../../../components/button/Button'
+
 import List from '../../../core/interface/List'
 import {handlePageListData} from '../../common/common-helper'
+import {getDateStr} from '../../../core/utils/dateUtils'
+import {fetchOrderOperationList} from '../questions-answers.action'
 
 interface OrderOperationRecordDialogProps {
   fetchOrderOperationList: (start, options) => void
@@ -40,15 +43,27 @@ class OrderOperationRecordDialog extends React.Component<OrderOperationRecordDia
     if (total != -1 && list.length == total) {
       return
     }
+    this.load()
+  }
+
+  load = () => {
     this.props.fetchOrderOperationList(this.start, {
-      start: this.start,
-      limit: 10
+      "start": this.start,
+      "limit": 10,
+      "operate_begin_time": getDateStr(this.state.startDate),
+      "operate_end_time": getDateStr(this.state.endDate),
+      "order_code": this.state.orderCode,
     })
     this.start++
   }
 
+  search = () => {
+    this.start = 0
+    this.load()
+  }
+
   componentDidMount() {
-    this.loadMoreList()
+    this.load()
   }
 
   render() {
@@ -70,7 +85,7 @@ class OrderOperationRecordDialog extends React.Component<OrderOperationRecordDia
         </Modal.Header>
         <Modal.Body>
           <div className="order-operation-box">
-            <div className="flex">
+            <div className="flex bottom">
               <div className="search-item-container">
                 <Label>起始日期</Label>
                 <DatePicker value={this.state.startDate} onChange={v => this.setState({startDate: v})}/>
@@ -82,8 +97,11 @@ class OrderOperationRecordDialog extends React.Component<OrderOperationRecordDia
               <div className="search-item-container">
                 <Label>订单号</Label>
                 <Input
-                  placeholder={'输入订单号'}
+                  placeholder="输入订单号"
                   value={this.state.orderCode} onChange={v => this.setState({orderCode: v})}/>
+              </div>
+              <div>
+                <Button onClick={this.search}>搜索</Button>
               </div>
             </div>
 

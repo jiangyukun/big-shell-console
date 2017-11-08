@@ -27,9 +27,9 @@ const pageList = fetchType => (iState = fromJS(initValue), action) => {
       break
 
     case fetchType + phase.SUCCESS:
-      let {total} = action.data
+      let {total, list} = action.data
       nextIState = nextIState.set('loaded', true).set('loading', false).set('total', total)
-      nextIState = updateList(nextIState, list => list.concat(action.data.list))
+      nextIState = updateList(nextIState, list1 => list1.concat(list || []))
       break
 
     case fetchType + phase.FAILURE:

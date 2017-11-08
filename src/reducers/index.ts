@@ -12,9 +12,14 @@ import pageList from './page-list.reducer'
 export default combineReducers({
   router: routerReducer,
   message: wrapReducerState(message),
+
   patientInfoList: wrapReducerState(data(PATIENT_INFO.FETCH_LIST)),
+
   laboratorySheetList: wrapReducerState(data(LABORATORY_SHEET.FETCH_LIST)),
+
   doctorAuditList: wrapReducerState(data(DOCTOR_AUDIT.FETCH_LIST)),
+
   questionAnswerList: wrapReducerState(data(QUESTIONS_ANSWERS.FETCH_LIST)),
   orderOperationList: wrapReducerState(pageList(QUESTIONS_ANSWERS.FETCH_ORDER_OPERATION_LIST)),
+  orderDetail: wrapReducerState(data(QUESTIONS_ANSWERS.FETCH_ORDER_DETAIL)),
 })

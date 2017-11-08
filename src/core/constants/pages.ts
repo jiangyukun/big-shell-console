@@ -13,5 +13,5 @@ export const PAGES = {
   CLINIC_DATE: 'clinic-date',
   DOCTOR_WALLET: 'doctor-wallet',
 
-  QUESTIONS_ANSWERS: 'questions-answers',
+  QA_ORDER: 'qa-order',
 }

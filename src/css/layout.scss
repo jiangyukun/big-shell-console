@@ -1,3 +1,25 @@
+$array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20;
+
+@mixin ttt($key, $p) {
+    @for $i from 1 through length($array) {
+        $item: nth($array, $i);
+        .#{$key}#{$item} {
+            #{$p}: #{$item}px
+        }
+    }
+}
+
+@include ttt('p', 'padding')
+@include ttt('pt', 'padding-top')
+@include ttt('pl', 'padding-left')
+@include ttt('pr', 'padding-right')
+@include ttt('pb', 'padding-bottom')
+
+@include ttt('m', 'margin')
+@include ttt('mt', 'margin-top')
+@include ttt('ml', 'margin-left')
+@include ttt('mr', 'margin-right')
+@include ttt('mb', 'margin-bottom')
 
 .flex {
     display: flex;
@@ -12,5 +34,11 @@
     &.between {
         justify-content: space-between;
     }
+    &.bottom {
+        align-items: flex-end;
+    }
 }
 
+.flex1 {
+    flex: 1;
+}

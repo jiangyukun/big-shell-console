@@ -5,6 +5,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 interface ButtonProps {
+  disabled?: boolean
   onClick?: () => void
   type?: string
 }
@@ -12,7 +13,7 @@ interface ButtonProps {
 class Button extends React.Component<ButtonProps> {
   render() {
     return (
-      <button className={classnames('button', this.props.type || '')} onClick={this.props.onClick}>
+      <button className={classnames('button', this.props.type || '')} onClick={this.props.onClick} disabled={this.props.disabled}>
         {this.props.children}
       </button>
     )
