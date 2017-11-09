@@ -14,6 +14,11 @@ import Data from '../../core/interface/Data'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
 import {handleListData} from '../common/common-helper'
 import {fetchList} from './questions-answers.action'
+import SearchBox from '../../components/search/SearchBox'
+import FilterItem from '../../components/query-filter/FilterItem'
+import DateInterval from '../../components/query-filter/extends/DateInterval'
+import FilterOptions from '../../components/query-filter/FilterOptions'
+import {filters} from './qa-order.constant'
 
 interface QuestionsAndAnswersProps extends AppFunctionPage {
   questionAnswerList: Data<any>
@@ -25,7 +30,23 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
     index: -1,
     currentPage: 0,
     showOrderRecord: false,
-    showOrderDetail: true
+    showOrderDetail: true,
+
+    startDate1: null,
+    endDate1: null,
+
+    answerStatus: '',
+
+    startDate2: null,
+    endDate2: null,
+
+    paymentStatus: '',
+    paymentType: '',
+
+    startDate3: null,
+    endDate3: null,
+
+    isHide: ''
   }
 
   toPage = (newPage?: number) => {
@@ -66,8 +87,49 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
         }
 
         <div className="toolbar">
-          <Button disabled={this.state.index == -1} onClick={() => this.setState({showOrderDetail: true})}>查看</Button>
-          <Button onClick={() => this.setState({showOrderRecord: true})}>操作记录</Button>
+          <div>
+            <Button disabled={this.state.index == -1} onClick={() => this.setState({showOrderDetail: true})}>查看</Button>
+            <Button onClick={() => this.setState({showOrderRecord: true})}>操作记录</Button>
+          </div>
+          <div>
+            <SearchBox label="患者" placeholder="输入手机号码、编号查询"
+                       searchKey={this.state.searchKey} onChange={v => this.setState({searchKey: v})}
+            />
+            <Button>导出到Excel</Button>
+          </div>
+        </div>
+        <div className="query-filter">
+          <FilterItem size="big" label="提问时间">
+            <DateInterval
+              startDate={this.state.startDate1} endDate={this.state.endDate1}
+              onStartDateChange={v => this.setState({startDate1: v})} onEndDateChange={v => this.setState({endDate1: v})}
+            />
+          </FilterItem>
+          <FilterItem size="big" label="回答时间">
+            <DateInterval
+              startDate={this.state.startDate2} endDate={this.state.endDate2}
+              onStartDateChange={v => this.setState({startDate2: v})} onEndDateChange={v => this.setState({endDate2: v})}
+            />
+          </FilterItem>
+          <FilterItem size="big" label="付款时间">
+            <DateInterval
+              startDate={this.state.startDate3} endDate={this.state.endDate3}
+              onStartDateChange={v => this.setState({startDate3: v})} onEndDateChange={v => this.setState({endDate3: v})}
+            />
+          </FilterItem>
+          <FilterItem label="回答状态">
+            <FilterOptions options={filters.answerStatus} value={this.state.answerStatus} onChange={v => this.setState({answerStatus: v})}/>
+          </FilterItem>
+          <FilterItem label="付款状态">
+            <FilterOptions options={filters.paymentStatus} value={this.state.paymentStatus} onChange={v => this.setState({paymentStatus: v})}/>
+          </FilterItem>
+          <FilterItem label="支付方式">
+            <FilterOptions options={filters.paymentType} value={this.state.paymentType} onChange={v => this.setState({paymentType: v})}/>
+          </FilterItem>
+
+          <FilterItem label="是否隐藏">
+            <FilterOptions options={filters.isHide} value={this.state.isHide} onChange={v => this.setState({isHide: v})}/>
+          </FilterItem>
         </div>
         <div className="list-wrap">
           <FixHeadList total={total}>

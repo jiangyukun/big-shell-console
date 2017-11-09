@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import Label from '../../../../components/element/Label'
+import OrderCategoryTitle from '../common/OrderCategoryTitle'
 
 interface RateInfoProps {
 
@@ -12,9 +13,7 @@ class RateInfo extends React.Component<RateInfoProps> {
   render() {
     return (
       <section className="rate-info">
-        <div className="detail-title">
-          <img src={require('../icon/rate.svg')}/>评分信息：
-        </div>
+        <OrderCategoryTitle src={require('../icon/rate.svg')} title="评分信息"/>
         <div className="rate-info-item">
           <Label size="small">用户评分</Label>
           <div>

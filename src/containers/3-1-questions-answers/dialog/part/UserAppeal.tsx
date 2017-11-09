@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import Label from '../../../../components/element/Label'
+import OrderCategoryTitle from '../common/OrderCategoryTitle'
 
 interface UserAppealProps {
 
@@ -11,27 +12,25 @@ interface UserAppealProps {
 class UserAppeal extends React.Component<UserAppealProps> {
   render() {
     return (
-      <section className="appeal-info">
-        <div className="detail-title">
-          <img src={require('../icon/qa.svg')}/>用户申诉：
-        </div>
-        <div className="appeal-info-item">
+      <section className="qa-big-category appeal-info">
+        <OrderCategoryTitle src={require('../icon/appeal.svg')} title="用户申诉"/>
+        <div className="category-item appeal-info-item">
           <Label size="small">申诉类别</Label>
           <div>
-            刘志华
+            我要退款（服务48小时后不可退款）
           </div>
         </div>
-        <div className="appeal-info-item">
+        <div className="category-item appeal-info-item">
           <Label size="small">申诉内容</Label>
           <div>
             抗病毒期间，感冒了还能吃药吗？哪些要可以吃啊？着急，在线等~回答的不太好，感觉不舒服
           </div>
         </div>
-        <div className="appeal-info-item">
+        <div className="category-item appeal-info-item">
           <Label size="small">申诉时间</Label>
           <div>2017-07-09 17:30:29</div>
         </div>
-        <div className="appeal-info-item">
+        <div className="category-item appeal-info-item">
           <div className="flex1">
             <div className="flex">
               <Label size="small">处理结果</Label>
@@ -42,7 +41,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
               <div>20170913为用户重新解答</div>
             </div>
           </div>
-          <div className="modify-appeal-container">
+          <div className="button-area">
             <button>修改处理结果</button>
           </div>
         </div>

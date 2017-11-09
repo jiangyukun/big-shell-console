@@ -8,13 +8,11 @@
             "last 2 versions",
             "ie >= 10"
           ]
-        },
-        "modules": false
+        }
       }
     ],
     "react"
   ],
   "plugins": [
-    "react-hot-loader/babel"
   ]
 }

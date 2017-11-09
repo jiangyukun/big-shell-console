@@ -2,20 +2,34 @@
  * Created by jiangyukun on 2017/11/8.
  */
 import React from 'react'
+import Confirm from 'app-core/common/Confirm'
+
 import Label from '../../../../components/element/Label'
+import OrderCategoryTitle from '../common/OrderCategoryTitle'
 
 interface PaymentInfoProps {
 
 }
 
 class PaymentInfo extends React.Component<PaymentInfoProps> {
+  state = {
+    showRefund: false
+  }
+
   render() {
     return (
-      <section className="payment-info">
-        <div className="detail-title">
-          <img src={require('../icon/card.svg')}/>付款信息：
-        </div>
-        <div className="payment-info-summary">
+      <section className="qa-big-category payment-info">
+        {
+          this.state.showRefund && (
+            <Confirm
+              message="确定要退款吗？退款将原路径返还到付款账户"
+              onConfirm={() => null}
+              onExited={() => this.setState({showRefund: false})}
+            />
+          )
+        }
+        <OrderCategoryTitle src={require('../icon/card.svg')} title="付款信息"/>
+        <div className="category-item payment-info-summary">
           <div className="summary-basic-info">
             <div>
               <Label size="small">付款状态</Label>已付款
@@ -38,7 +52,7 @@ class PaymentInfo extends React.Component<PaymentInfoProps> {
             </div>
           </div>
           <div className="refund">
-            <button className="refund-btn">退款</button>
+            <button className="refund-btn" onClick={() => this.setState({showRefund: true})}>退款</button>
           </div>
         </div>
       </section>

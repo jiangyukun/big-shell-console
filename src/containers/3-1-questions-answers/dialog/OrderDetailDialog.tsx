@@ -16,6 +16,7 @@ import AnswerInfo from './part/AnswerInfo'
 import PaymentInfo from './part/PaymentInfo'
 import OrderBasicInfo from './part/OrderBasicInfo'
 import UserAppeal from './part/UserAppeal'
+import Other from './part/Other'
 
 interface OrderDetailDialogProps {
   orderCode: string
@@ -49,6 +50,7 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
     const detail = this.props.orderDetail.data || {}
     const basicInfo = detail['base_info'] || {}
     const username = detail['real_name']
+    const other = detail['other_info'] || {}
 
     return (
       <Modal className="qa-order-detail" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
@@ -66,13 +68,12 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
         <Modal.Body>
           <div>
 
-
             <OrderBasicInfo detail={detail}/>
             <PaymentInfo/>
             <AnswerInfo/>
             <RateInfo/>
             <UserAppeal/>
-
+            <Other other={other}/>
 
           </div>
         </Modal.Body>

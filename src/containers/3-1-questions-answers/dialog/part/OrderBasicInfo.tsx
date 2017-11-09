@@ -2,6 +2,8 @@
  * Created by jiangyukun on 2017/11/8.
  */
 import React from 'react'
+
+
 import {getTxt} from '../../../common/common-helper'
 
 interface OrderBasicInfoProps {
@@ -9,6 +11,9 @@ interface OrderBasicInfoProps {
 }
 
 class OrderBasicInfo extends React.Component<OrderBasicInfoProps> {
+  state = {
+
+  }
   render() {
     const detail = this.props.detail
 
@@ -25,9 +30,10 @@ class OrderBasicInfo extends React.Component<OrderBasicInfoProps> {
       <section className="qa-basic-info">
         <div className="user-basic-info">
           <img src={photoUrl}/>
-          <span className="username">{username}</span>
-          <span className="nickname">{nickname}</span>
-          <span className="mobile">{mobile}</span>
+          <div>
+            <div className="username">{username} ( {nickname} )</div>
+            <div className="mobile">{mobile}</div>
+          </div>
         </div>
         <div className="qa-content">
           <div className="qa-content-text">{content}</div>
