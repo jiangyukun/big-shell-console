@@ -18,3 +18,7 @@ export function getPathPrefix() {
 export function getPath(page) {
   return getPathPrefix() + page
 }
+
+export let browserParams = {
+  scrollWidth: 0
+}

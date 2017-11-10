@@ -1,17 +1,16 @@
 .fix-head-list {
-    background: #fff;
     flex: 1;
-    overflow: auto;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
+    overflow: hidden;
+    .head-wrap {
+        overflow: hidden;
+    }
     .head-container {
         display: flex;
-        border-bottom: 1px solid #E7E7E9;
 
         .item {
-            font-size: 13px;
-            background-color: #fff;
+            background-color: #b9def0;
             padding: 10px 0 10px 10px;
             color: #666;
         }
@@ -32,26 +31,24 @@
         }
         .row-container {
             display: flex;
-            border-bottom: 1px solid #E7E7E9;
 
             .item {
-                overflow: hidden;
                 word-break: break-all;
                 padding: 15px 0 15px 10px;
             }
 
             &:nth-of-type(odd) {
-                //background-color: #eee;
+                background-color: #eee;
             }
             &:nth-of-type(even) {
-                //background-color: #fff;
+                background-color: #fff;
             }
 
             &:hover {
                 background-color: rgba(46, 213, 86, 0.2);
             }
             &.selected {
-                background-color: rgba(46, 213, 86, 0.5);
+                background-color: rgba(46, 213, 86, 0.5)
             }
         }
     }

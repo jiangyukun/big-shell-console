@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+import {browserParams} from '../../core/env'
 
 class Item extends React.Component<any> {
   render() {
@@ -26,7 +27,13 @@ class FixHead extends React.Component<any> {
   static Item = Item
   static contextTypes = {
     weights: PropTypes.array,
-    bodyWidth: PropTypes.number
+    bodyWidth: PropTypes.number,
+    scrollLeft: PropTypes.number
+  }
+  wrap: HTMLDivElement
+
+  componentDidUpdate() {
+    this.wrap.scrollLeft = this.context.scrollLeft
   }
 
   render() {
@@ -45,7 +52,7 @@ class FixHead extends React.Component<any> {
     })
 
     return (
-      <div>
+      <div ref={c => this.wrap = c} className="head-wrap" style={{marginRight: browserParams.scrollWidth}}>
         <ul className="head-container" style={{width: this.context.bodyWidth || 'auto'}}>
           {childrenWithWidth}
         </ul>

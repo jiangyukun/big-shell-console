@@ -6,12 +6,19 @@ import PropTypes from 'prop-types'
 
 class FixBody extends React.Component {
   static contextTypes = {
-    total: PropTypes.number
+    total: PropTypes.number,
+    onLayoutUpdate: PropTypes.func
+  }
+
+  handleScroll = (e) => {
+    const {offsetWidth, clientWidth, scrollLeft} = e.target
+    this.context.onLayoutUpdate('scrollLeft', scrollLeft)
+    this.context.onLayoutUpdate('scrollWidth', offsetWidth - clientWidth)
   }
 
   render() {
     return (
-      <div className="fix-body-wrap">
+      <div className="fix-body-wrap" onScroll={this.handleScroll}>
         {
           this.context.total == 0 && (
             <div className="no-list-data">

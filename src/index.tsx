@@ -17,6 +17,7 @@ import allReducers from './reducers/'
 import request_3_phase from './middlewares/request_3_phase'
 import handle_error from './middlewares/handle_error'
 import rootSaga from './sagas/'
+import EnvChecker from './EnvChecker'
 
 let history = createBrowserHistory()
 let sagaMiddleware = createSagaMiddleware()
@@ -31,6 +32,8 @@ if (module1.hot) {
     store.replaceReducer(nextRootReducer)
   })
 }
+
+render(<EnvChecker/>, document.getElementById('root'))
 
 render(
   <Root store={store} history={history}/>,
