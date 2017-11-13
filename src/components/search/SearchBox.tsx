@@ -8,6 +8,7 @@ interface SearchBoxProps {
   placeholder: string
   searchKey: string
   onChange: (v) => void
+  onSearch: () => void
 }
 
 class SearchBox extends React.Component<SearchBoxProps> {
@@ -16,7 +17,7 @@ class SearchBox extends React.Component<SearchBoxProps> {
       <div className="search-box">
         {this.props.label}：
         <input value={this.props.searchKey} onChange={e => this.props.onChange(e.target.value)}/>
-        <button className="to-search">搜索</button>
+        <button className="to-search" onClick={this.props.onSearch}>搜索</button>
       </div>
     )
   }

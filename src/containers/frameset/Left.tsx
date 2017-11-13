@@ -14,32 +14,8 @@ interface LeftProps {
 }
 
 class Left extends React.Component<LeftProps> {
-  url: any
   state = {
     open: true
-  }
-
-  componentWillMount() {
-    this.url = {
-      patientInfo: getPath(PAGES.PATIENT_INFO),
-      treatSituation: getPath(PAGES.TREAT_SITUATION),
-      laboratorySheet: getPath(PAGES.LABORATORY_SHEET),
-      followApply: getPath(PAGES.FOLLOW_APPLY),
-      doctorAudit: getPath(PAGES.DOCTOR_AUDIT),
-      hospitalManage: getPath(PAGES.HOSPITAL_MANAGE),
-      clinicDate: getPath(PAGES.CLINIC_DATE),
-      doctorWallet: getPath(PAGES.DOCTOR_WALLET),
-
-      qAOrder: getPath(PAGES.QA_ORDER),
-    }
-  }
-
-  isActive = (page) => {
-    return getPath(page) == this.props.currentPath
-  }
-
-  getSubMenuClass = (page) => {
-    return classnames('app-sub-menu', {active: this.isActive(page)})
   }
 
   render() {
@@ -63,7 +39,7 @@ class Left extends React.Component<LeftProps> {
         <div className="app-nav">
           <Menu
             defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultOpenKeys={['sub1', 'sub2', 'sub3']}
             mode="inline"
             theme="dark"
           >

@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import classnames from 'classnames'
+import Button from '../button/Button'
 
 interface SelectedFilterProps {
   notEmpty: boolean
@@ -19,13 +20,13 @@ class SelectedFilter extends React.Component<SelectedFilterProps> {
           {this.props.children}
         </div>
         <div className="select-result">
-          <button
+          <Button
             className={classnames('clear', {'disabled': !this.props.notEmpty})}
             onClick={this.props.clearAll}
             disabled={!this.props.notEmpty}>
             清除
-          </button>
-          <button className="submit" onClick={this.props.beginFilter}>确定</button>
+          </Button>
+          <Button className="submit" onClick={this.props.beginFilter}>确定</Button>
         </div>
         <div className="clear disabled"></div>
       </div>

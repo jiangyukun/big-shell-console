@@ -11,7 +11,7 @@ interface LabelProps {
 class Label extends React.Component<LabelProps> {
   render() {
     return (
-      <label className={`app-label ${this.props.size}`}>
+      <label className={`app-label ${this.props.size || ''}`}>
         {this.props.children}
         {this.props.necessary && (
           <span className="label-necessary">*</span>

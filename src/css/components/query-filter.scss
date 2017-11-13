@@ -45,4 +45,25 @@
             display: block;
         }
     }
+
+    .selected-filter {
+        border-top: 1px solid #eee;
+        padding-top: 7px;
+        display: flex;
+        align-items: center;
+    }
+
+    .selected-fitler-item {
+        margin: 2px 5px 2px 0;
+        display: inline-block;
+        border: 1px solid #ddd;
+        padding: 3px 7px;
+        border-radius: 4px;
+        .item-label {
+            color: #aaaaaa;
+        }
+        .item-value {
+            color: #2b77e5;
+        }
+    }
 }

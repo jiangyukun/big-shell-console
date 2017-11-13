@@ -13,15 +13,22 @@ import SearchBox from '../../components/search/SearchBox'
 import FilterItem from '../../components/query-filter/FilterItem'
 import DateInterval from '../../components/query-filter/extends/DateInterval'
 import FilterOptions from '../../components/query-filter/FilterOptions'
+import SelectedFilter from '../../components/query-filter/SelectedFilter'
 
 import Data from '../../core/interface/Data'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
 import {filters} from './qa-order.constant'
-import {handleListData} from '../common/common-helper'
+import {handleListData, getStartEndDateStr, haveNotEmptyValue} from '../common/common-helper'
 import {fetchList} from './questions-answers.action'
+import {getDateStr} from '../../core/utils/dateUtils'
+import Icon from '../../components/Icon'
+import EditRemark from '../../components/EditRemark'
+import EditAppealResultDialog from './dialog/EditAppealResultDialog'
+import SelectedItem from '../../components/query-filter/SelectedItem'
 
 interface QuestionsAndAnswersProps extends AppFunctionPage {
   questionAnswerList: Data<any>
+  updateRemark: () => void
 }
 
 class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
@@ -31,6 +38,7 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
     currentPage: 0,
     showOrderRecord: false,
     showOrderDetail: false,
+    showEditRemark: false,
 
     startDate1: null,
     endDate1: null,
@@ -55,8 +63,34 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
       this.setState({currentPage: newPage})
     }
     this.props.fetchList({
-      start: 0,
-      limit: 10,
+      "start": newPage,
+      "limit": 10,
+      "key_words": this.state.searchKey,
+      "question_begin_time": getDateStr(this.state.startDate1),
+      "question_end_time": getDateStr(this.state.endDate1),
+      "answer_status": this.state.answerStatus,
+      "answer_begin_time": getDateStr(this.state.startDate2),
+      "answer_end_time": getDateStr(this.state.endDate2),
+      "pay_status": this.state.paymentStatus,
+      "pay_way": this.state.paymentType,
+      "pay_begin_time": getDateStr(this.state.startDate3),
+      "pay_end_time": getDateStr(this.state.endDate3),
+      "is_hide": this.state.isHide
+    })
+  }
+
+  clearAllFilter = () => {
+    this.setState({
+      startDate1: null,
+      endDate1: null,
+      answerStatus: '',
+      startDate2: null,
+      endDate2: null,
+      paymentStatus: '',
+      paymentType: '',
+      startDate3: null,
+      endDate3: null,
+      isHide: ''
     })
   }
 
@@ -85,6 +119,15 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
             />
           )
         }
+        {
+          this.state.showEditRemark && (
+            <EditRemark
+              updateRemark={this.props.updateRemark}
+              updateRemarkSuccess={false}
+              onExited={() => this.setState({showEditRemark: false})}
+            />
+          )
+        }
 
         <div className="toolbar">
           <div>
@@ -94,6 +137,7 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
           <div>
             <SearchBox label="患者" placeholder="输入手机号码、编号查询"
                        searchKey={this.state.searchKey} onChange={v => this.setState({searchKey: v})}
+                       onSearch={() => this.toPage(0)}
             />
             <Button>导出到Excel</Button>
           </div>
@@ -126,10 +170,43 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
           <FilterItem label="支付方式">
             <FilterOptions options={filters.paymentType} value={this.state.paymentType} onChange={v => this.setState({paymentType: v})}/>
           </FilterItem>
-
           <FilterItem label="是否隐藏">
             <FilterOptions options={filters.isHide} value={this.state.isHide} onChange={v => this.setState({isHide: v})}/>
           </FilterItem>
+          <SelectedFilter
+            notEmpty={haveNotEmptyValue(this.state, ['startDate1', 'endDate1', 'startDate2', 'endDate2', 'startDate3', 'endDate3', 'answerStatus', 'paymentStatus', 'paymentType', 'isHide'])}
+            beginFilter={() => this.toPage(0)}
+            clearAll={this.clearAllFilter}
+          >
+            <SelectedItem
+              label="提问时间" text={getStartEndDateStr(this.state.startDate1, this.state.endDate1)}
+              onReset={() => this.setState({startDate1: null, endDate1: null})}
+            />
+            <SelectedItem
+              label="回答时间" text={getStartEndDateStr(this.state.startDate2, this.state.endDate2)}
+              onReset={() => this.setState({startDate2: null, endDate2: null})}
+            />
+            <SelectedItem
+              label="付款时间" text={getStartEndDateStr(this.state.startDate3, this.state.endDate3)}
+              onReset={() => this.setState({startDate3: null, endDate3: null})}
+            />
+            <SelectedItem
+              label="回答状态" value={this.state.answerStatus} options={filters.answerStatus}
+              onReset={() => this.setState({answerStatus: ''})}
+            />
+            <SelectedItem
+              label="付款状态" value={this.state.paymentStatus} options={filters.paymentStatus}
+              onReset={() => this.setState({paymentStatus: ''})}
+            />
+            <SelectedItem
+              label="支付方式" value={this.state.paymentType} options={filters.paymentType}
+              onReset={() => this.setState({paymentType: ''})}
+            />
+            <SelectedItem
+              label="是否隐藏" value={this.state.isHide} options={filters.isHide}
+              onReset={() => this.setState({isHide: ''})}
+            />
+          </SelectedFilter>
         </div>
         <FixHeadList total={total} minWidth="2000px">
           <FixHead>
@@ -165,9 +242,9 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
                     <FixRow.Item>{item['patient_code']}</FixRow.Item>
                     <FixRow.Item>{item['user_account']}</FixRow.Item>
                     <FixRow.Item>{item['real_name']}</FixRow.Item>
+                    <FixRow.Item>{item['']}</FixRow.Item>
                     <FixRow.Item>{item['question_time']}</FixRow.Item>
-                    <FixRow.Item>{item['question_type']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_info_id']}</FixRow.Item>
+                    <FixRow.Item>{item['']}</FixRow.Item>
                     <FixRow.Item>{item['answer_person']}</FixRow.Item>
                     <FixRow.Item>{item['answer_content']}</FixRow.Item>
                     <FixRow.Item>{item['answer_time']}</FixRow.Item>
@@ -178,7 +255,10 @@ class QuestionsAndAnswers extends React.Component<QuestionsAndAnswersProps> {
                     <FixRow.Item>{item['evaluate_store']}</FixRow.Item>
                     <FixRow.Item>{item['evaluate_content']}</FixRow.Item>
                     <FixRow.Item>{item['evaluate_time']}</FixRow.Item>
-                    <FixRow.Item>{item['order_remark']}</FixRow.Item>
+                    <FixRow.Item>
+                      {item['order_remark']}
+                      <Icon type="remark" onClick={() => this.setState({showEditRemark: true})}/>
+                    </FixRow.Item>
                     <FixRow.Item>{item['is_hide']}</FixRow.Item>
                   </FixRow>
                 )

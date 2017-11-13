@@ -25,9 +25,8 @@ const middleware = routerMiddleware(history)
 const store = createStore(allReducers, {}, applyMiddleware(middleware, request_3_phase, handle_error, sagaMiddleware))
 sagaMiddleware.run(rootSaga)
 
-let module1: any = module
-if (module1.hot) {
-  module1.hot.accept('./reducers/', () => {
+if (module.hot) {
+  module.hot.accept('./reducers/', () => {
     const nextRootReducer = require('./reducers/').default
     store.replaceReducer(nextRootReducer)
   })

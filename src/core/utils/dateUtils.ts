@@ -17,7 +17,7 @@ export function getDateTimeStr(d) {
   if (!d) {
     return null
   }
-  if (typeof d == 'number') {
+  if (typeof d == 'number' || typeof d == 'string') {
     return moment(d).format('YYYY-MM-DD HH:mm')
   }
   return d.format('YYYY-MM-DD HH:mm')

@@ -13,7 +13,7 @@ interface OtherProps {
 
 class Other extends React.Component<OtherProps> {
   state = {
-    editRemark: true
+    editRemark: false
   }
 
   render() {
@@ -39,7 +39,7 @@ class Other extends React.Component<OtherProps> {
             }
             {
               !remark && (
-                <span style={{color: 'gray'}}>未填写</span>
+                <span style={{color: '#aaa'}}>未填写</span>
               )
             }
           </div>

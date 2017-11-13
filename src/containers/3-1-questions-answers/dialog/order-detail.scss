@@ -53,6 +53,11 @@ $big-border: 1px solid #bbb;
                 border-bottom: none;
             }
         }
+
+        .no-data {
+            padding-top: 10px;
+            color: #aaa;
+        }
     }
 
     .item-main-content {
@@ -153,11 +158,7 @@ $big-border: 1px solid #bbb;
     }
 
     .rate-info {
-        padding: 10px 0;
-        border-bottom: $big-border;
         .rate-info-item {
-            padding-top: 10px;
-            display: flex;
             img {
                 vertical-align: sub;
                 width: 16px;

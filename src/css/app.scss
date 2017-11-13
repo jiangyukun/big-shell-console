@@ -3,15 +3,21 @@
     margin: 0;
 }
 
+html, body {
+    font-family: SimSun Arial;
+}
+
 html, body, #root {
     height: 100%;
 }
+/*
 
 body {
     font-size: 12px;
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "Segoe UI", Roboto,
     "PingFang SC", "Hiragino Sans GB", SimSun, "Microsoft YaHei", sans-serif;
 }
+*/
 
 //覆盖bootstrap样式
 label {

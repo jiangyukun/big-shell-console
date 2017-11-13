@@ -13,7 +13,7 @@ export function fetchList(options) {
       type: QUESTIONS_ANSWERS.FETCH_LIST,
       http: () => _post(urlPrefix + '/v1/question/list', {body: options}),
       handleResponse: data => ({
-        list: data['list'],
+        list: data['list'] || [],
         total: data['totalCount']
       })
     }

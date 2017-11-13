@@ -2,31 +2,38 @@
  * Created by jiangyukun on 2017/4/26.
  */
 import React from 'react'
-import classnames from 'classnames'
+import Icon from '../Icon'
 
 interface SelectedItemProps {
-  label: string,
-  value: string,
-  itemList: any[],
+  label: string
+  value?: string
+  text?: string
+  options?: any[]
   onReset: () => void
 }
 
 class SelectedItem extends React.Component<SelectedItemProps> {
   render() {
-    if (!this.props.value) {
-      return null
-    }
-    let value = this.props.value
-    if (this.props.itemList) {
-      value = this.props.itemList.find(item => item.value == value).text
+    if (!this.props.value && !this.props.text) return null
+
+    let text = this.props.text
+    if (!text) {
+      if (this.props.value && this.props.options) {
+        let match = this.props.options.find(item => item.value == this.props.value)
+        if (match) {
+          text = match.text
+        }
+      }
     }
 
     return (
-      <a
-        className={classnames('select-result select-result2 select-resultqage')}>
-        <span>{this.props.label}： {value}</span>
-        <i className="icon-close" onClick={this.props.onReset}></i>
-      </a>
+      <span className="selected-fitler-item">
+        <span>
+          <span className="item-label">{this.props.label}：</span>
+          <span className="item-value">{text}</span>
+          </span>
+        <Icon type="remove-filter-item" onClick={this.props.onReset}></Icon>
+      </span>
     )
   }
 }

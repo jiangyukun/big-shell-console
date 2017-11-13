@@ -8,12 +8,14 @@ interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   type?: string
+  className?: string
 }
 
 class Button extends React.Component<ButtonProps> {
   render() {
     return (
-      <button className={classnames('button', this.props.type || '')} onClick={this.props.onClick} disabled={this.props.disabled}>
+      <button className={classnames('button', this.props.type || '', this.props.className)}
+              onClick={this.props.onClick} disabled={this.props.disabled}>
         {this.props.children}
       </button>
     )

@@ -3,20 +3,18 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import Modal from 'app-core/modal'
+import Modal from 'app-core/modal/Modal'
 import Confirm from 'app-core/common/Confirm'
 
-import Data from '../../../core/interface/Data'
-import {fetchOrderDetail} from '../questions-answers.action'
-import {getTxt} from '../../common/common-helper'
-import Label from '../../../components/element/Label'
-import Button from '../../../components/button/Button'
 import RateInfo from './part/RateInfo'
 import AnswerInfo from './part/AnswerInfo'
 import PaymentInfo from './part/PaymentInfo'
 import OrderBasicInfo from './part/OrderBasicInfo'
 import UserAppeal from './part/UserAppeal'
 import Other from './part/Other'
+
+import Data from '../../../core/interface/Data'
+import {fetchOrderDetail} from '../questions-answers.action'
 
 interface OrderDetailDialogProps {
   orderCode: string
@@ -52,6 +50,18 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
     const username = detail['real_name']
     const other = detail['other_info'] || {}
 
+    const paymentStatus = detail['pay_status']
+    const payment = detail['pay_info'] || {}
+
+    const answerStatus = detail['answer_status'] != '1'
+    const answer = detail['answer_info'] || {}
+
+    const rateStatus = detail['evaluate_status'] != '1'
+    const rate = detail['evaluate_info']
+
+    const appealStatus = detail['appeal_status'] != '1'
+    const appeal = detail['appeal_info']
+
     return (
       <Modal className="qa-order-detail" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
         {
@@ -69,10 +79,10 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
           <div>
 
             <OrderBasicInfo detail={detail}/>
-            <PaymentInfo/>
-            <AnswerInfo/>
-            <RateInfo/>
-            <UserAppeal/>
+            <PaymentInfo paymentStatus={paymentStatus} payment={payment}/>
+            <AnswerInfo answerStatus={answerStatus} answer={answer}/>
+            <RateInfo rateStatus={rateStatus} rate={rate}/>
+            <UserAppeal appealStatus={appealStatus} appeal={appeal}/>
             <Other other={other}/>
 
           </div>
