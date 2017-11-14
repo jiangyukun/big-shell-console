@@ -3,7 +3,6 @@
  */
 import 'babel-polyfill'
 import 'isomorphic-fetch'
-import createSagaMiddleware from 'redux-saga'
 
 import React from 'react'
 import {render} from 'react-dom'
@@ -12,18 +11,15 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import {routerMiddleware} from 'react-router-redux'
 
 import './css/index'
+import EnvChecker from './EnvChecker'
 import Root from './containers/Root'
 import allReducers from './reducers/'
 import request_3_phase from './middlewares/request_3_phase'
 import handle_error from './middlewares/handle_error'
-import rootSaga from './sagas/'
-import EnvChecker from './EnvChecker'
 
 let history = createBrowserHistory()
-let sagaMiddleware = createSagaMiddleware()
 const middleware = routerMiddleware(history)
-const store = createStore(allReducers, {}, applyMiddleware(middleware, request_3_phase, handle_error, sagaMiddleware))
-sagaMiddleware.run(rootSaga)
+const store = createStore(allReducers, {}, applyMiddleware(middleware, request_3_phase, handle_error))
 
 if (module.hot) {
   module.hot.accept('./reducers/', () => {

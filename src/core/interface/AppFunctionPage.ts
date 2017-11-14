@@ -5,7 +5,6 @@ import CommonFunction from './CommonFunction'
 
 interface AppFunctionPage extends CommonFunction {
   fetchList: any
-  roleCode: number
 }
 
 export default AppFunctionPage

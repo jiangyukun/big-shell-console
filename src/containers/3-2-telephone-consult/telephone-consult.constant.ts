@@ -2,6 +2,13 @@
  * Created by jiangyukun on 2017/11/9.
  */
 export const filters = {
+  currentServiceStatus: [
+    {value: '1', text: '等待确认服务时间'},
+    {value: '2', text: '已确定计划服务时间'},
+    {value: '3', text: '服务已结束'},
+    {value: '4', text: '服务已取消'},
+    {value: '5', text: '医生确认已服务'},
+  ],
   answerStatus: [
     {value: '1', text: '无回答'},
     {value: '2', text: '已回答'},
@@ -17,7 +24,7 @@ export const filters = {
   ],
   isHide: [
     {value: '1', text: '是'},
-    {value: '2', text: '否'},
+    {value: '2', text: '否'}
   ],
 }
 

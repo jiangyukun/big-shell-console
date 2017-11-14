@@ -6,8 +6,6 @@ import Confirm from 'app-core/common/Confirm'
 
 import Label from '../../../../components/element/Label'
 import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
-import {getPaymentText, getPaymentTypeText} from '../../qa-order.helper'
-import {paymentTypeMapper} from '../../qa-order.constant'
 import {getDateTimeStr} from '../../../../core/utils/dateUtils'
 
 interface PaymentInfoProps {
@@ -47,27 +45,7 @@ class PaymentInfo extends React.Component<PaymentInfoProps> {
         {
           paymentStatus != '1' && (
             <div className="category-item payment-info-summary">
-              <div className="summary-basic-info">
-                <div>
-                  <Label size="small">付款状态</Label>{getPaymentText(paymentStatus)}
-                </div>
-                <div className="mt7">
-                  <Label size="small">付款方式</Label>{getPaymentTypeText(payment['pay_way'])}
-                  {
-                    payment['pay_way'] == paymentTypeMapper.WEI_XIN && (
-                      <img src={require('../icon/weixin.svg')}/>
-                    )
-                  }
-                  {
-                    payment['pay_way'] == paymentTypeMapper.ZHI_FU_BAO && (
-                      <img src={require('../icon/zhifubao.svg')}/>
-                    )
-                  }
-                </div>
-                <div className="mt7">
-                  <Label size="small">付款时间</Label>{getDateTimeStr(payment['pay_time'])}
-                </div>
-              </div>
+
               <div className="money-container">
                 <div>
                   <div className="money-count">

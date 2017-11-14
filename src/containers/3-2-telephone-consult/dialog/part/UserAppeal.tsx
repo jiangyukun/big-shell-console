@@ -6,7 +6,6 @@ import React from 'react'
 import Label from '../../../../components/element/Label'
 import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
 import PartContent from '../../../common/PartContent'
-import EditAppealResultDialog from '../EditAppealResultDialog'
 
 interface UserAppealProps {
   appealStatus: boolean
@@ -21,13 +20,6 @@ class UserAppeal extends React.Component<UserAppealProps> {
   render() {
     return (
       <section className="qa-big-category appeal-info">
-        {
-          this.state.showModify && (
-            <EditAppealResultDialog
-              onExited={() => this.setState({showModify: false})}
-            />
-          )
-        }
         <OrderCategoryTitle src={require('../icon/appeal.svg')} title="用户申诉"/>
         <PartContent status={this.props.appealStatus} noDataTxt="未申诉">
           <div className="category-item appeal-info-item">

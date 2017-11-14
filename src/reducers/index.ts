@@ -8,6 +8,7 @@ import {wrapReducerState} from 'app-core/tools/redux-utils'
 import data from './data.reducer'
 import {PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, QUESTIONS_ANSWERS} from '../core/constants/types'
 import pageList from './page-list.reducer'
+import qaOrder from '../containers/3-1-questions-answers/qa-order.reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -19,6 +20,7 @@ export default combineReducers({
 
   doctorAuditList: wrapReducerState(data(DOCTOR_AUDIT.FETCH_LIST)),
 
+  qaOrder: wrapReducerState(qaOrder),
   questionAnswerList: wrapReducerState(data(QUESTIONS_ANSWERS.FETCH_LIST)),
   orderOperationList: wrapReducerState(pageList(QUESTIONS_ANSWERS.FETCH_ORDER_OPERATION_LIST)),
   orderDetail: wrapReducerState(data(QUESTIONS_ANSWERS.FETCH_ORDER_DETAIL)),

@@ -7,6 +7,7 @@ import ConfirmOrClose from 'app-core/common/ConfirmOrClose'
 import RemarkDialogContent from './other/RemarkDialogContent'
 
 interface EditRemarkProps {
+  value?: string
   updateRemark: (newRemark) => void
   updateRemarkSuccess: boolean
   onExited: () => void
@@ -15,7 +16,7 @@ interface EditRemarkProps {
 class EditRemark extends React.Component<EditRemarkProps, any> {
   originalValue = ''
 
-  constructor(props) {
+  constructor(props: EditRemarkProps) {
     super(props)
     this.originalValue = props.value
     this.state = {

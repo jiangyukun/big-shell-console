@@ -4,6 +4,7 @@
 import Data from '../../core/interface/Data'
 import List from '../../core/interface/List'
 import {getDateStr} from '../../core/utils/dateUtils'
+import phase from '../../core/constants/phase'
 
 export function handleListData(responseData: Data<any>) {
   const {data, loading, loaded} = responseData
@@ -51,4 +52,32 @@ export function haveNotEmptyValue(obj, keys) {
     if (obj[key]) notEmpty = true
   })
   return notEmpty
+}
+
+export function handleFlagState(iState, action, type, key) {
+  if (action.type == type + phase.START) {
+    return iState.set(key, false)
+  }
+  if (action.type == type + phase.SUCCESS) {
+    return iState.set(key, true)
+  }
+  return iState
+}
+
+export function flagState(iState, action) {
+  let nextIState = iState
+  let chain = {
+    get: () => nextIState,
+    handle: (type, key) => {
+      if (action.type == type + phase.START) {
+        nextIState = iState.set(key, false)
+      }
+      if (action.type == type + phase.SUCCESS) {
+        nextIState = iState.set(key, true)
+      }
+      return chain
+    }
+  }
+
+  return chain
 }

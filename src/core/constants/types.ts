@@ -31,6 +31,7 @@ export const QUESTIONS_ANSWERS = {
   FETCH_LIST: null,
   FETCH_ORDER_OPERATION_LIST: null,
   FETCH_ORDER_DETAIL: null,
+  UPDATE_REMARK: null,
 
 }
 

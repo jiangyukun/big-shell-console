@@ -11,7 +11,7 @@ export function fetchList(options) {
   return {
     [THREE_PHASE]: {
       type: QUESTIONS_ANSWERS.FETCH_LIST,
-      http: () => _post(urlPrefix + '/v1/question/list', {body: options}),
+      http: () => _post(urlPrefix + '/v1/consult/list', {body: options}),
       handleResponse: data => ({
         list: data['list'] || [],
         total: data['totalCount']
@@ -20,7 +20,7 @@ export function fetchList(options) {
   }
 }
 
-export function fetchOrderDetail(orderCode) {
+export function fetchConsultDetail(orderCode) {
   return {
     [THREE_PHASE]: {
       type: QUESTIONS_ANSWERS.FETCH_ORDER_DETAIL,

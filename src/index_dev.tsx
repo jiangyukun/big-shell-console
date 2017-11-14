@@ -6,7 +6,6 @@ import 'isomorphic-fetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore, applyMiddleware} from 'redux'
-import createSagaMiddleware from 'redux-saga'
 import createBrowserHistory from 'history/createBrowserHistory'
 import {routerMiddleware} from 'react-router-redux'
 import {AppContainer} from 'react-hot-loader'
@@ -16,14 +15,11 @@ import Root from './containers/Root'
 import allReducers from './reducers/'
 import request_3_phase from './middlewares/request_3_phase'
 import handle_error from './middlewares/handle_error'
-import rootSaga from './sagas/'
 import EnvChecker from './EnvChecker'
 
 let history = createBrowserHistory()
-let sagaMiddleware = createSagaMiddleware()
 const middleware = routerMiddleware(history)
-const store = createStore(allReducers, {}, applyMiddleware(middleware, request_3_phase, handle_error, sagaMiddleware))
-sagaMiddleware.run(rootSaga)
+const store = createStore(allReducers, {}, applyMiddleware(middleware, request_3_phase, handle_error))
 
 if (module.hot) {
   module.hot.accept('./reducers/', () => {
