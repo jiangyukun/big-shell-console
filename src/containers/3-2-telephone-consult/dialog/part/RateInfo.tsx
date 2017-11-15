@@ -8,16 +8,15 @@ import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
 import PartContent from '../../../common/PartContent'
 
 interface RateInfoProps {
-  rateStatus: boolean
-  rate: any
+
 }
 
 class RateInfo extends React.Component<RateInfoProps> {
   render() {
     return (
-      <section className="rate-info qa-big-category">
+      <section className="big-category rate-info">
         <OrderCategoryTitle src={require('../icon/rate.svg')} title="评分信息"/>
-        <PartContent status={this.props.rateStatus} noDataTxt="暂无评分">
+        <PartContent status={true} noDataTxt="暂无评分">
           <div className="rate-info-item category-item">
             <Label size="small">用户评分</Label>
             <div>

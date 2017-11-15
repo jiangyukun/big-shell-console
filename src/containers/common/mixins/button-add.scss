@@ -1,0 +1,9 @@
+@mixin button-add {
+    padding: 8px 10px;
+    line-height: 1;
+    background: #fff;
+    color: #7265e6;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    transition: all .5s;
+}

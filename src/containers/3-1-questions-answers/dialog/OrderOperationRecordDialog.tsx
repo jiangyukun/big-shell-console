@@ -69,7 +69,7 @@ class OrderOperationRecordDialog extends React.Component<OrderOperationRecordDia
   render() {
     let {list, total} = handlePageListData(this.props.orderOperationList)
     return (
-      <Modal contentComponent={FullDialogContent} style={{width: '650px'}}
+      <Modal contentComponent={FullDialogContent} style={{width: '650px'}} className="qa-operation-list-dialog"
              show={this.state.show} onHide={this.close} onExited={this.props.onExited}
       >
         {

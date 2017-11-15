@@ -38,7 +38,9 @@ class FixRow extends React.Component<FixRowProps> {
   row: HTMLUListElement
 
   componentDidMount() {
-    this.context.onLayoutUpdate('bodyWidth', this.row.clientWidth)
+    setTimeout(() => {
+      this.context.onLayoutUpdate('bodyWidth', this.row.clientWidth)
+    }, 0)
   }
 
   render() {

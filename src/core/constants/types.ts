@@ -35,7 +35,22 @@ export const QUESTIONS_ANSWERS = {
 
 }
 
+export const TELEPHONE_CONSULT = {
+  FETCH_LIST: null,
+  FETCH_CONSULT_DETAIL: null,
+  UPDATE_REMARK: null,
+
+}
+
+export const USER_APPEAL = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
+
+}
+
 generatorValueFromKey('PATIENT_INFO', PATIENT_INFO)
 generatorValueFromKey('LABORATORY_SHEET', LABORATORY_SHEET)
 generatorValueFromKey('DOCTOR_AUDIT', DOCTOR_AUDIT)
 generatorValueFromKey('QUESTIONS_ANSWERS', QUESTIONS_ANSWERS)
+generatorValueFromKey('TELEPHONE_CONSULT', TELEPHONE_CONSULT)
+generatorValueFromKey('USER_APPEAL', USER_APPEAL)

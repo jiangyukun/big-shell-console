@@ -8,8 +8,6 @@ import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
 import PartContent from '../../../common/PartContent'
 
 interface UserAppealProps {
-  appealStatus: boolean
-  appeal: any
 }
 
 class UserAppeal extends React.Component<UserAppealProps> {
@@ -19,9 +17,9 @@ class UserAppeal extends React.Component<UserAppealProps> {
 
   render() {
     return (
-      <section className="qa-big-category appeal-info">
+      <section className="big-category appeal-info">
         <OrderCategoryTitle src={require('../icon/appeal.svg')} title="用户申诉"/>
-        <PartContent status={this.props.appealStatus} noDataTxt="未申诉">
+        <PartContent status={true} noDataTxt="未申诉">
           <div className="category-item appeal-info-item">
             <Label size="small">申诉类别</Label>
             <div>

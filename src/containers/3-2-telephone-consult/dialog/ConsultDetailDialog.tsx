@@ -6,15 +6,16 @@ import {connect} from 'react-redux'
 import Modal from 'app-core/modal/Modal'
 import Confirm from 'app-core/common/Confirm'
 
+import ConsultBasicInfo from './part/ConsultBasicInfo'
 import RateInfo from './part/RateInfo'
-import AnswerInfo from './part/AnswerInfo'
 import PaymentInfo from './part/PaymentInfo'
-import OrderBasicInfo from './part/OrderBasicInfo'
 import UserAppeal from './part/UserAppeal'
 import Other from './part/Other'
 
 import Data from '../../../core/interface/Data'
 import {fetchConsultDetail} from '../telephone-consult.action'
+import ServiceInfo from './part/ServiceInfo'
+import TwoSidesCall from './part/TwoSidesCall'
 
 interface OrderDetailDialogProps {
   consultId: string
@@ -45,25 +46,9 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
   }
 
   render() {
-    const detail = this.props.orderDetail.data || {}
-    const basicInfo = detail['base_info'] || {}
-    const username = detail['real_name']
-    const other = detail['other_info'] || {}
-
-    const paymentStatus = detail['pay_status']
-    const payment = detail['pay_info'] || {}
-
-    const answerStatus = detail['answer_status'] != '1'
-    const answer = detail['answer_info'] || {}
-
-    const rateStatus = detail['evaluate_status'] != '1'
-    const rate = detail['evaluate_info']
-
-    const appealStatus = detail['appeal_status'] != '1'
-    const appeal = detail['appeal_info']
 
     return (
-      <Modal className="qa-order-detail" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
+      <Modal className="telephone-consult-detail" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
         {
           this.state.showAddConfirm && (
             <Confirm message="？"
@@ -73,17 +58,18 @@ class OrderDetailDialog extends React.Component<OrderDetailDialogProps> {
         }
 
         <Modal.Header closeButton={true}>
-          <Modal.Title>{username} 的问答订单 订单编号： {this.props.consultId}</Modal.Title>
+          <Modal.Title>的咨询订单 订单编号：{this.props.consultId}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
 
-            <OrderBasicInfo detail={detail}/>
-            <PaymentInfo paymentStatus={paymentStatus} payment={payment}/>
-            <AnswerInfo answerStatus={answerStatus} answer={answer}/>
-            <RateInfo rateStatus={rateStatus} rate={rate}/>
-            <UserAppeal appealStatus={appealStatus} appeal={appeal}/>
-            <Other other={other}/>
+            <ConsultBasicInfo/>
+            <PaymentInfo/>
+            <ServiceInfo/>
+            <TwoSidesCall/>
+            <RateInfo/>
+            <UserAppeal/>
+            <Other/>
 
           </div>
         </Modal.Body>

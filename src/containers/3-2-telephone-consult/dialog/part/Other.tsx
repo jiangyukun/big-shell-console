@@ -8,7 +8,6 @@ import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
 import EditRemark from '../../../../components/EditRemark'
 
 interface OtherProps {
-  other: any
 }
 
 class Other extends React.Component<OtherProps> {
@@ -17,12 +16,12 @@ class Other extends React.Component<OtherProps> {
   }
 
   render() {
-    const other = this.props.other
+    const other = {}
     let remark = ''
     if (other['order_remark']) remark = other['order_remark']
 
     return (
-      <section className="qa-big-category other">
+      <section className="big-category other">
         {
           this.state.editRemark && (
             <EditRemark updateRemark={() => null} updateRemarkSuccess={false} onExited={() => this.setState({editRemark: false})}/>
@@ -50,7 +49,7 @@ class Other extends React.Component<OtherProps> {
         <div className="category-item">
           <div className="item-main-content">
             <Label size="small">是否隐藏</Label>
-            <div>{this.props.other['is_hide_desc']}</div>
+            <div>是</div>
           </div>
           <div className="button-area">
             <button>恢复</button>

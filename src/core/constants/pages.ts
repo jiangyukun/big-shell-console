@@ -14,5 +14,6 @@ export const PAGES = {
   DOCTOR_WALLET: 'doctor-wallet',
 
   QA_ORDER: 'qa-order',
-  TELEPHONE_CONSULT: 'telephone-consult'
+  TELEPHONE_CONSULT: 'telephone-consult',
+  USER_APPEAL: 'user-appeal'
 }

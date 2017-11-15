@@ -26,7 +26,7 @@ import {getDateStr} from '../../core/utils/dateUtils'
 import {fetchList, updateRemark} from './telephone-consult.action'
 
 interface TelephoneConsultProps extends AppFunctionPage {
-  questionAnswerList: Data<any>
+  telephoneConsultList: Data<any>
   updateRemark: (orderCode, newRemark) => void
   updateRemarkSuccess: boolean
 }
@@ -36,7 +36,6 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
     searchKey: '',
     index: -1,
     currentPage: 0,
-    showOrderRecord: false,
     showConsultDetail: false,
     showEditRemark: false,
 
@@ -84,7 +83,7 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
   }
 
   updateRemark = (newRemark) => {
-    const item = handleListData(this.props.questionAnswerList).list[this.state.index]
+    const item = handleListData(this.props.telephoneConsultList).list[this.state.index]
     this.props.updateRemark(item['phone_order_code'], newRemark)
   }
 
@@ -100,7 +99,7 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
   }
 
   render() {
-    const {total, list, loading, loaded} = handleListData(this.props.questionAnswerList)
+    const {total, list, loading, loaded} = handleListData(this.props.telephoneConsultList)
     const item = list[this.state.index] || {}
 
     return (
@@ -108,7 +107,7 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
         {
           this.state.showConsultDetail && (
             <ConsultDetailDialog
-              consultId={item['phone_order_code'] || '0117110002401'}
+              consultId={item['phone_order_code'] || '0217110004842'}
               onExited={() => this.setState({showConsultDetail: false})}
             />
           )
@@ -126,8 +125,7 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
 
         <div className="toolbar">
           <div>
-            <Button disabled={this.state.index == -1} onClick={() => this.setState({showOrderDetail: true})}>查看</Button>
-            <Button onClick={() => this.setState({showOrderRecord: true})}>操作记录</Button>
+            <Button disabled={this.state.index == -1} onClick={() => this.setState({showConsultDetail: true})}>查看</Button>
           </div>
           <div>
             <SearchBox label="患者" placeholder="输入手机号码、编号查询"
@@ -256,8 +254,8 @@ class TelephoneConsult extends React.Component<TelephoneConsultProps> {
 
 function mapStateToProps(state) {
   return {
-    updateRemarkSuccess: state.qaOrder.updateRemarkSuccess,
-    questionAnswerList: state.questionAnswerList
+    updateRemarkSuccess: state.telephoneConsult.updateRemarkSuccess,
+    telephoneConsultList: state.telephoneConsultList
   }
 }
 

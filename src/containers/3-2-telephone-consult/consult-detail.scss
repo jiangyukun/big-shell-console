@@ -1,0 +1,126 @@
+@import "../common/big-category";
+@import "../common/payment-info";
+@import '../common/mixins/circle-line-circle';
+@import '../common/mixins/button-add';
+
+$border: 1px solid #e6e6e6;
+$big-border: 1px solid #bbb;
+
+@mixin available-week-day {
+    .weeks, .morning, .afternoon {
+        display: flex;
+        width: 275px;
+        .item {
+            flex: 1;
+            border-left: 1px solid #ddd;
+            &:first-child {
+                border-left: none;
+            }
+        }
+    }
+    .weeks {
+        .week-item {
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+        }
+    }
+    .morning {
+        border-top: 1px solid #ddd;
+        .morning-item {
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+        }
+    }
+    .afternoon {
+        border-top: 1px solid #ddd;
+        .afternoon-item {
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+        }
+    }
+}
+
+.telephone-consult-detail {
+    @include big-category;
+
+    @include payment-info;
+
+    @include available-week-day;
+
+    .item-main-content {
+        display: flex;
+        flex: 1;
+        align-items: center;
+    }
+
+    .user-basic-info {
+        img {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 100%;
+        }
+    }
+
+    .service-info {
+        img {
+            height: 16px;
+        }
+        .service-info-item {
+            @include circle-line-circle;
+        }
+        .service-info-main {
+            display: flex;
+            margin-top: 7px;
+        }
+        .add-service-info {
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            width: 120px;
+            border-left: $border;
+            button {
+                @include button-add;
+            }
+        }
+    }
+    .two-sides-call {
+        img {
+            height: 16px;
+        }
+        .call-item {
+            @include circle-line-circle;
+        }
+    }
+    .rate-info {
+        .rate-info-item {
+            img {
+                vertical-align: sub;
+                width: 16px;
+                margin-right: 5px;
+            }
+        }
+    }
+    .appeal-info {
+        img {
+            height: 20px;
+        }
+        button {
+            @include button-add;
+        }
+    }
+    .other {
+        img {
+            height: 16px;
+        }
+        button {
+            @include button-add;
+            padding: 4px 15px;
+            border-radius: 3px;
+            color: #32ACEF;
+        }
+    }
+}

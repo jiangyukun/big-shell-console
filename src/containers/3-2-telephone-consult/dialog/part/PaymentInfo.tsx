@@ -9,8 +9,7 @@ import OrderCategoryTitle from '../../../common/OrderCategoryTitle'
 import {getDateTimeStr} from '../../../../core/utils/dateUtils'
 
 interface PaymentInfoProps {
-  paymentStatus: string
-  payment: any
+
 }
 
 class PaymentInfo extends React.Component<PaymentInfoProps> {
@@ -19,11 +18,10 @@ class PaymentInfo extends React.Component<PaymentInfoProps> {
   }
 
   render() {
-    const payment = this.props.payment
-    const paymentStatus = this.props.paymentStatus
+    let paymentStatus = '2'
 
     return (
-      <section className="qa-big-category payment-info">
+      <section className="big-category payment-info">
         {
           this.state.showRefund && (
             <Confirm
@@ -45,12 +43,23 @@ class PaymentInfo extends React.Component<PaymentInfoProps> {
         {
           paymentStatus != '1' && (
             <div className="category-item payment-info-summary">
-
+              <div className="summary-basic-info">
+                <div>
+                  <Label size="small">付款状态</Label>已付款
+                </div>
+                <div className="mt7">
+                  <Label size="small">付款方式</Label>微信
+                  <img src={require('../icon/weixin.svg')}/>
+                </div>
+                <div className="mt7">
+                  <Label size="small">付款时间</Label>2017-07-09 17:30:29
+                </div>
+              </div>
               <div className="money-container">
                 <div>
                   <div className="money-count">
                     <span>￥</span>
-                    <span>{payment['pay_money']}</span>
+                    <span>20</span>
                   </div>
                   <div className="money-text">付款金额</div>
                 </div>

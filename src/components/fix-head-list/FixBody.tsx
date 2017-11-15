@@ -11,9 +11,8 @@ class FixBody extends React.Component {
   }
 
   handleScroll = (e) => {
-    const {offsetWidth, clientWidth, scrollLeft} = e.target
+    const {scrollLeft} = e.target
     this.context.onLayoutUpdate('scrollLeft', scrollLeft)
-    this.context.onLayoutUpdate('scrollWidth', offsetWidth - clientWidth)
   }
 
   render() {

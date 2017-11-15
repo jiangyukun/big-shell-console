@@ -20,7 +20,7 @@ module.exports = {
   output: {
     path: __dirname + '/build/prod/',
     filename: 'bundle' + '.min.js',
-    publicPath: `${context}/crm/build/prod/`,
+    publicPath: `${context}/console/build/prod/`,
     chunkFilename: '[name].chunk.js?v=' + moment().format('YYYY-MM-DD')
   },
   resolve: {
@@ -42,11 +42,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      hash: true
-    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin('style' + '.min.css'),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./manifest.json')
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
