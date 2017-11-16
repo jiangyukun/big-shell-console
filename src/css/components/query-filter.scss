@@ -10,13 +10,14 @@
         align-items: center;
         margin-bottom: 7px;
         margin-right: 15px;
+        min-width: 350px;
 
         &.middle {
-            width: 350px;
+            //width: 350px;
         }
 
         &.big {
-            width: 500px;
+            //width: 500px;
         }
 
         .filter-items {
@@ -33,7 +34,7 @@
                     border-radius: 3px;
                 }
                 &.filter-select-item {
-                    width: 200px;
+                    //width: 200px;
                 }
             }
         }

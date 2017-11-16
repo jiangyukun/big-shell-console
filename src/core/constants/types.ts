@@ -12,6 +12,12 @@ function generatorValueFromKey(prefix: string, obj: object): void {
   Object.keys(obj).forEach(key => obj[key] = typeFn(key))
 }
 
+export const APP = {
+  FETCH_PROVINCE_LIST: null,
+  FETCH_CITY_LIST: null,
+  FETCH_HOSPITAL_LIST: null
+}
+
 export const PATIENT_INFO = {
   FETCH_LIST: null,
 
@@ -24,6 +30,12 @@ export const LABORATORY_SHEET = {
 
 export const DOCTOR_AUDIT = {
   FETCH_LIST: null,
+
+}
+
+export const HOSPITAL_MANAGE = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
 
 }
 
@@ -45,12 +57,18 @@ export const TELEPHONE_CONSULT = {
 export const USER_APPEAL = {
   FETCH_LIST: null,
   UPDATE_REMARK: null,
+  FETCH_APPEAL_TYPE_LIST: null,
 
 }
 
+generatorValueFromKey('APP', APP)
+
 generatorValueFromKey('PATIENT_INFO', PATIENT_INFO)
 generatorValueFromKey('LABORATORY_SHEET', LABORATORY_SHEET)
+
 generatorValueFromKey('DOCTOR_AUDIT', DOCTOR_AUDIT)
+generatorValueFromKey('HOSPITAL_MANAGE', HOSPITAL_MANAGE)
+
 generatorValueFromKey('QUESTIONS_ANSWERS', QUESTIONS_ANSWERS)
 generatorValueFromKey('TELEPHONE_CONSULT', TELEPHONE_CONSULT)
 generatorValueFromKey('USER_APPEAL', USER_APPEAL)

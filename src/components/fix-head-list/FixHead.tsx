@@ -28,7 +28,8 @@ class FixHead extends React.Component<any> {
   static contextTypes = {
     weights: PropTypes.array,
     bodyWidth: PropTypes.number,
-    scrollLeft: PropTypes.number
+    scrollLeft: PropTypes.number,
+    verticalScroll: PropTypes.bool
   }
   wrap: HTMLDivElement
 
@@ -37,7 +38,7 @@ class FixHead extends React.Component<any> {
   }
 
   render() {
-    const weights = this.context.weights
+    const {weights, bodyWidth, verticalScroll} = this.context
     const childrenWithWidth = []
     let current = 0
     React.Children.forEach(this.props.children, (child: any) => {
@@ -50,10 +51,14 @@ class FixHead extends React.Component<any> {
         current++
       }
     })
+    let style: any = {}
+    if (verticalScroll) {
+      style.marginRight = browserParams.scrollWidth
+    }
 
     return (
-      <div ref={c => this.wrap = c} className="head-wrap" style={{marginRight: browserParams.scrollWidth}}>
-        <ul className="head-container" style={{width: this.context.bodyWidth || 'auto'}}>
+      <div ref={c => this.wrap = c} className="head-wrap" style={style}>
+        <ul className="head-container" style={{width: bodyWidth || 'auto'}}>
           {childrenWithWidth}
         </ul>
       </div>

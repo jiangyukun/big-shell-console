@@ -20,16 +20,20 @@ class FixHeadList extends React.Component<FixHeadListProps> {
     onLayoutUpdate: PropTypes.func,
     bodyWidth: PropTypes.number,
     scrollLeft: PropTypes.number,
-    minWidth: PropTypes.string
+    minWidth: PropTypes.string,
+    verticalScroll: PropTypes.bool
   }
 
   state = {
     bodyWidth: 0,
-    scrollLeft: 0
+    scrollLeft: 0,
+    verticalScroll: false
   }
 
   onLayoutUpdate = (name, value) => {
-    this.setState({[name]: value})
+    if (this.state[name] != value) {
+      this.setState({[name]: value})
+    }
   }
 
   render() {
@@ -47,7 +51,8 @@ class FixHeadList extends React.Component<FixHeadListProps> {
       minWidth: this.props.minWidth,
       onLayoutUpdate: this.onLayoutUpdate,
       bodyWidth: this.state.bodyWidth,
-      scrollLeft: this.state.scrollLeft
+      scrollLeft: this.state.scrollLeft,
+      verticalScroll: this.state.verticalScroll
     }
   }
 }

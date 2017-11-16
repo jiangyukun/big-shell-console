@@ -9,15 +9,32 @@ class FixBody extends React.Component {
     total: PropTypes.number,
     onLayoutUpdate: PropTypes.func
   }
+  body: HTMLDivElement
 
   handleScroll = (e) => {
-    const {scrollLeft} = e.target
+    const {scrollLeft, clientHeight, scrollHeight} = e.target
     this.context.onLayoutUpdate('scrollLeft', scrollLeft)
+    this.context.onLayoutUpdate('verticalScroll', scrollHeight > clientHeight)
+  }
+
+  refreshScrollState = () => {
+    setTimeout(() => {
+      const {clientHeight, scrollHeight} = this.body
+      this.context.onLayoutUpdate('verticalScroll', scrollHeight > clientHeight)
+    }, 0)
+  }
+
+  componentDidMount() {
+    this.refreshScrollState()
+  }
+
+  componentDidUpdate() {
+    this.refreshScrollState()
   }
 
   render() {
     return (
-      <div className="fix-body-wrap" onScroll={this.handleScroll}>
+      <div ref={c => this.body = c} className="fix-body-wrap" onScroll={this.handleScroll}>
         {
           this.context.total == 0 && (
             <div className="no-list-data">

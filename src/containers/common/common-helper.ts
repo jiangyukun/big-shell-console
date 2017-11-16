@@ -46,24 +46,6 @@ export function getStartEndDateStr(startDate, endDate) {
   }
 }
 
-export function haveNotEmptyValue(obj, keys) {
-  let notEmpty = false
-  keys.forEach(key => {
-    if (obj[key]) notEmpty = true
-  })
-  return notEmpty
-}
-
-export function handleFlagState(iState, action, type, key) {
-  if (action.type == type + phase.START) {
-    return iState.set(key, false)
-  }
-  if (action.type == type + phase.SUCCESS) {
-    return iState.set(key, true)
-  }
-  return iState
-}
-
 export function flagState(iState, action) {
   let nextIState = iState
   let chain = {
@@ -80,4 +62,31 @@ export function flagState(iState, action) {
   }
 
   return chain
+}
+
+export function haveNotEmptyValue(obj, keys) {
+  let notEmpty = false
+  keys.forEach(key => {
+    if (obj[key]) notEmpty = true
+  })
+  return notEmpty
+}
+
+export function getProvinceCityText(province, city, provinceList, cityList) {
+  if (!province && !city) return ''
+  let result = ''
+  if (province) {
+    result += provinceList.find(item => item.value == province).text
+  }
+  if (city) {
+    result += '，' + cityList.find(item => item.value == city).text
+  }
+
+  return result
+}
+
+export function getYesNo(code) {
+  if (code == 0) return '否'
+  if (code == 1) return '是'
+  return '未知'
 }

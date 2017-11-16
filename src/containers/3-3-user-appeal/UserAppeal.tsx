@@ -22,11 +22,14 @@ import addCommonFunction from '../../core/hoc/addCommonFunction'
 import {filters} from './user-appeal.constant'
 import {handleListData, getStartEndDateStr, haveNotEmptyValue} from '../common/common-helper'
 import {getDateStr} from '../../core/utils/dateUtils'
-import {fetchList, updateRemark} from './user-appeal.action'
+import {fetchList, updateRemark, fetchAppealTypeList} from './user-appeal.action'
+import {getOrderTypeText} from './user-appeal.helper'
 
 interface UserAppealProps extends AppFunctionPage {
   userAppealList: Data<any>
-  updateRemark: any
+  fetchAppealTypeList: () => void
+  appealTypeList: Data<any[]>
+  updateRemark: (orderCode, orderType, newRemark) => void
   updateRemarkSuccess: boolean
 }
 
@@ -34,6 +37,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
   state = {
     currentPage: 0,
     index: -1,
+    showEditRemark: false,
 
     searchKey: '',
     orderType: '',
@@ -54,10 +58,10 @@ class UserAppeal extends React.Component<UserAppealProps> {
       "start": newPage,
       "limit": 10,
       "key_words": this.state.searchKey,
-      "order_type": getDateStr(this.state.orderType),
-      "appeal_type_id": getDateStr(this.state.appealType),
-      "appeal_begin_time": this.state.appealStartDate,
-      "appeal_end_time": this.state.appealEndDate,
+      "order_type": this.state.orderType,
+      "appeal_type_id": this.state.appealType,
+      "appeal_begin_time": getDateStr(this.state.appealStartDate),
+      "appeal_end_time": getDateStr(this.state.appealEndDate),
       "appeal_result": this.state.handleResult,
       "appeal_result_begin_time": getDateStr(this.state.handleStartDate),
       "appeal_result_end_time": getDateStr(this.state.handleEndDate),
@@ -79,11 +83,19 @@ class UserAppeal extends React.Component<UserAppealProps> {
 
   updateRemark = (newRemark) => {
     const item = handleListData(this.props.userAppealList).list[this.state.index]
-    this.props.updateRemark(item['phone_order_code'], newRemark)
+    this.props.updateRemark(item['order_code'], item['order_type'], newRemark)
   }
 
   componentDidMount() {
+    this.props.fetchAppealTypeList()
     this.toPage(0)
+  }
+
+  componentWillReceiveProps(nextProps: UserAppealProps) {
+    if (!this.props.updateRemarkSuccess && nextProps.updateRemarkSuccess) {
+      this.props.showSuccess('修改备注成功！')
+      this.toPage()
+    }
   }
 
   render() {
@@ -92,6 +104,13 @@ class UserAppeal extends React.Component<UserAppealProps> {
 
     return (
       <div className="app-function-page">
+        {
+          this.state.showEditRemark && (
+            <EditRemark
+              value={item['appeal_remark']}
+              updateRemark={this.updateRemark} updateRemarkSuccess={this.props.updateRemarkSuccess} onExited={() => this.setState({showEditRemark: false})}/>
+          )
+        }
         <div className="toolbar">
           <div>
             <Button disabled={this.state.index == -1} onClick={() => this.setState({showConsultDetail: true})}>查看</Button>
@@ -110,7 +129,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
                            onChange={v => this.setState({orderType: v})}/>
           </FilterItem>
           <FilterItem label="申诉类别">
-            <FilterOptions options={filters.appealType} useSelect={true}
+            <FilterOptions options={this.props.appealTypeList.data || []} useSelect={true}
                            value={this.state.appealType} onChange={v => this.setState({appealType: v})}/>
           </FilterItem>
           <FilterItem size="big" label="申诉时间">
@@ -138,7 +157,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
               onReset={() => this.setState({orderType: ''})}
             />
             <SelectedItem
-              label="申诉类别" value={this.state.appealType} options={filters.appealType}
+              label="申诉类别" value={this.state.appealType} options={this.props.appealTypeList.data || []}
               onReset={() => this.setState({appealType: ''})}
             />
             <SelectedItem
@@ -155,7 +174,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
             />
           </SelectedFilter>
         </div>
-        <FixHeadList total={total} minWidth="1500px">
+        <FixHeadList total={total} minWidth="1500px" weights={[1, 1, 1, 2,2]}>
           <FixHead>
             <FixHead.Item>申诉订单</FixHead.Item>
             <FixHead.Item>订单类别</FixHead.Item>
@@ -179,7 +198,7 @@ class UserAppeal extends React.Component<UserAppealProps> {
                           selected={this.state.index == index}
                   >
                     <FixRow.Item>{item['order_code']}</FixRow.Item>
-                    <FixRow.Item>{item['order_type']}</FixRow.Item>
+                    <FixRow.Item>{getOrderTypeText(item['order_type'])}</FixRow.Item>
                     <FixRow.Item></FixRow.Item>
                     <FixRow.Item>{item['appeal_type']}</FixRow.Item>
                     <FixRow.Item>{item['appeal_content']}</FixRow.Item>
@@ -207,10 +226,11 @@ class UserAppeal extends React.Component<UserAppealProps> {
 function mapStateToProps(state) {
   return {
     updateRemarkSuccess: state.userAppeal.updateRemarkSuccess,
-    userAppealList: state.userAppealList
+    userAppealList: state.userAppealList,
+    appealTypeList: state.appealTypeList
   }
 }
 
-export default connect(mapStateToProps, {fetchList, updateRemark})(
+export default connect(mapStateToProps, {fetchList, updateRemark, fetchAppealTypeList})(
   addCommonFunction(UserAppeal)
 )

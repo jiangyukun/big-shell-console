@@ -10,6 +10,7 @@ html, body {
 html, body, #root {
     height: 100%;
 }
+
 /*
 
 body {
@@ -118,4 +119,12 @@ label {
         flex-direction: column;
         background: #E6EBEF;
     }
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: #2B343D;
+}
+
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background: #2B343D;
 }

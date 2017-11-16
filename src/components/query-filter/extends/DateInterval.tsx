@@ -27,9 +27,9 @@ class DateInterval extends React.Component<DateIntervalProps> {
           不限
         </li>
 
-        <DatePicker size="small" value={this.props.startDate} onChange={v => this.props.onStartDateChange(v)}/>
+        <DatePicker size="small" placeholder="选择开始日期" value={this.props.startDate} onChange={v => this.props.onStartDateChange(v)}/>
         <span className="value-to-value">到</span>
-        <DatePicker size="small" value={this.props.endDate} onChange={v => this.props.onEndDateChange(v)}/>
+        <DatePicker size="small" placeholder="选择结束日期" value={this.props.endDate} onChange={v => this.props.onEndDateChange(v)}/>
       </ul>
     )
   }

@@ -1,19 +1,18 @@
 @mixin xx {
     display: inline-block;
-    margin-left: 3px;
     cursor: pointer;
-    width: 12px;
+    width: 14px;
     height: 12px;
     background-size: cover;
 }
 
 .icon-remark {
-    @include xx;
     background: url(./icon/edit.svg);
+    @include xx;
 
 }
 
 .icon-remove-filter-item {
-    @include xx;
     background: url(./icon/remove.svg);
+    @include xx;
 }
