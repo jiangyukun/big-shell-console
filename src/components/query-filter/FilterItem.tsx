@@ -11,6 +11,7 @@ interface FilterItemProps {
   label: string
   className?: string
   size?: 'small' | 'middle' | 'big'
+  style?: any
 }
 
 class FilterItem extends React.Component<FilterItemProps> {
@@ -20,7 +21,7 @@ class FilterItem extends React.Component<FilterItemProps> {
 
   render() {
     return (
-      <div className={classnames('filter-item-container', this.props.size, this.props.className)}>
+      <div className={classnames('filter-item-container', this.props.size, this.props.className)} style={this.props.style}>
         <FilterLabel label={this.props.label}/>
         <div className="filter-item-wrapper">
           {this.props.children}

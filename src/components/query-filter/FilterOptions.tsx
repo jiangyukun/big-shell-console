@@ -10,11 +10,12 @@ interface FilterOptionsProps {
   value: string
   onChange: (value) => void
   useSelect?: boolean
+  selectWidth?: string
 }
 
 class FilterOptions extends React.Component<FilterOptionsProps> {
   static defaultProps = {
-    useSelect: false
+    useSelect: false,
   }
 
   render() {
@@ -43,10 +44,12 @@ class FilterOptions extends React.Component<FilterOptionsProps> {
         {
           (this.props.useSelect || options.length > 5) && (
             <li className="filter-select-item filter-item">
-              <Select1 value={this.props.value}
-                       className={classnames('small', {'selected': this.props.value != ''})}
-                       options={options}
-                       onChange={value => this.props.onChange(value)}/>
+              <Select1
+                value={this.props.value}
+                className={classnames('small', {'selected': this.props.value != ''})}
+                options={options}
+                onChange={value => this.props.onChange(value)}
+              />
             </li>
           )
         }

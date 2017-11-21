@@ -5,6 +5,7 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 
 import PatientInfo from '../1-1-patient-info/PatientInfo'
+import TreatSituation from '../1-2-treat-situation/TreatSituation'
 import LaboratorySheet from '../1-3-laboratory-sheet/LaboratorySheet'
 import DoctorAudit from '../2-1-doctor-audit/DoctorAudit'
 import HospitalManage from '../2-2-hospital-manage/HospitalManage'
@@ -13,6 +14,7 @@ import TelephoneConsult from '../3-2-telephone-consult/TelephoneConsult'
 import UserAppeal from '../3-3-user-appeal/UserAppeal'
 
 import {PAGES} from '../../core/constants/pages'
+import FollowApply from '../1-4-follow-apply/FollowApply'
 
 interface ContentProps {
   match: any
@@ -29,7 +31,10 @@ class Content extends React.Component<ContentProps> {
     return (
       <div className="page-content">
         <Route path={`${urlPrefix}/${PAGES.PATIENT_INFO}`} component={PatientInfo}/>
+        <Route path={`${urlPrefix}/${PAGES.TREAT_SITUATION}`} component={TreatSituation}/>
         <Route path={`${urlPrefix}/${PAGES.LABORATORY_SHEET}`} component={LaboratorySheet}/>
+        <Route path={`${urlPrefix}/${PAGES.FOLLOW_APPLY}`} component={FollowApply}/>
+
         <Route path={`${urlPrefix}/${PAGES.DOCTOR_AUDIT}`} component={DoctorAudit}/>
         <Route path={`${urlPrefix}/${PAGES.HOSPITAL_MANAGE}`} component={HospitalManage}/>
 

@@ -1,3 +1,11 @@
+@mixin input {
+    border: 1px solid #cfdadd;
+    border-radius: 4px;
+    padding: 2px 5px;
+    outline: none;
+    vertical-align: middle;
+}
+
 .query-filter {
     background: #fff;
     color: #777;
@@ -34,7 +42,7 @@
                     border-radius: 3px;
                 }
                 &.filter-select-item {
-                    //width: 200px;
+                    min-width: 120px;
                 }
             }
         }
@@ -66,5 +74,22 @@
         .item-value {
             color: #2b77e5;
         }
+    }
+
+    .custom-content-input {
+        width: 150px;
+        @include input;
+
+        &.number {
+            width: 50px
+        }
+
+        ~ .unit {
+            margin-left: 5px;
+        }
+    }
+    .hospital-filter-input {
+        width: 150px;
+        @include input;
     }
 }

@@ -20,14 +20,23 @@ export const APP = {
 
 export const PATIENT_INFO = {
   FETCH_LIST: null,
+}
 
+export const TREAT_SITUATION = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
 }
 
 export const LABORATORY_SHEET = {
   FETCH_LIST: null,
-
 }
 
+export const FOLLOW_APPLY = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
+}
+
+/* 医生 */
 export const DOCTOR_AUDIT = {
   FETCH_LIST: null,
 
@@ -64,6 +73,7 @@ export const USER_APPEAL = {
 generatorValueFromKey('APP', APP)
 
 generatorValueFromKey('PATIENT_INFO', PATIENT_INFO)
+generatorValueFromKey('TREAT_SITUATION', TREAT_SITUATION)
 generatorValueFromKey('LABORATORY_SHEET', LABORATORY_SHEET)
 
 generatorValueFromKey('DOCTOR_AUDIT', DOCTOR_AUDIT)
