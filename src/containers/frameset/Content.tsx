@@ -15,6 +15,8 @@ import UserAppeal from '../3-3-user-appeal/UserAppeal'
 
 import {PAGES} from '../../core/constants/pages'
 import FollowApply from '../1-4-follow-apply/FollowApply'
+import ClinicDate from '../2-3-clinic-date/ClinicDate'
+import DoctorWallet from '../2-4-doctor-wallet/DoctorWallet'
 
 interface ContentProps {
   match: any
@@ -37,6 +39,8 @@ class Content extends React.Component<ContentProps> {
 
         <Route path={`${urlPrefix}/${PAGES.DOCTOR_AUDIT}`} component={DoctorAudit}/>
         <Route path={`${urlPrefix}/${PAGES.HOSPITAL_MANAGE}`} component={HospitalManage}/>
+        <Route path={`${urlPrefix}/${PAGES.CLINIC_DATE}`} component={ClinicDate}/>
+        <Route path={`${urlPrefix}/${PAGES.DOCTOR_WALLET}`} component={DoctorWallet}/>
 
         <Route path={`${urlPrefix}/${PAGES.QA_ORDER}`} component={QuestionsAndAnswers}/>
         <Route path={`${urlPrefix}/${PAGES.TELEPHONE_CONSULT}`} component={TelephoneConsult}/>

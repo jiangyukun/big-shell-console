@@ -45,9 +45,19 @@ export const DOCTOR_AUDIT = {
 export const HOSPITAL_MANAGE = {
   FETCH_LIST: null,
   UPDATE_REMARK: null,
-
 }
 
+export const CLINIC_DATE = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
+}
+
+export const DOCTOR_WALLET = {
+  FETCH_LIST: null,
+  UPDATE_REMARK: null,
+}
+
+/* 订单 */
 export const QUESTIONS_ANSWERS = {
   FETCH_LIST: null,
   FETCH_ORDER_OPERATION_LIST: null,

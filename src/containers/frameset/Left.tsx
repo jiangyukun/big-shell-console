@@ -40,7 +40,7 @@ class Left extends React.Component<LeftProps> {
         </div>
         <div className="app-nav">
           <Menu
-            defaultSelectedKeys={['1']}
+            defaultSelectedKeys={[this.props.currentPath]}
             defaultOpenKeys={['sub1', 'sub2', 'sub3']}
             mode="inline"
             theme="dark"
