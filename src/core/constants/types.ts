@@ -29,6 +29,8 @@ export const TREAT_SITUATION = {
 
 export const LABORATORY_SHEET = {
   FETCH_LIST: null,
+  FETCH_SHEET_CATEGORY_LIST: null,
+  UPDATE_REMARK: null,
 }
 
 export const FOLLOW_APPLY = {

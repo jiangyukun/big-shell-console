@@ -15,7 +15,6 @@ import SelectedFilter from '../../components/query-filter/SelectedFilter'
 import EditRemark from '../../components/EditRemark'
 import SelectedItem from '../../components/query-filter/SelectedItem'
 import HospitalSelect from '../../components/query-filter/extends/HospitalSelect'
-import DateInterval from '../../components/query-filter/extends/DateInterval'
 
 import Data from '../../core/interface/Data'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
@@ -63,9 +62,7 @@ class DoctorWallet extends React.Component<DoctorWalletProps> {
   clearAllFilter = () => {
     this.setState({
       searchKey: '',
-      takeMedicine: '',
-      week: '',
-      patientConditionStatus: ''
+
     })
   }
 

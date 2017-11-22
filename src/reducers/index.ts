@@ -9,19 +9,19 @@ import {wrapReducerState} from 'app-core/tools/redux-utils'
 import data from './data.reducer'
 import pageList from './page-list.reducer'
 
+import treatSituation from '../containers/1-2-treat-situation/treat-situation.reducer'
+import followApply from '../containers/1-4-follow-apply/follow-apply.reducer'
+import hospitalManage from '../containers/2-2-hospital-manage/hospital-manage.reducer'
+import clinicDate from '../containers/2-3-clinic-date/clinic-date.reducer'
+import doctorWallet from '../containers/2-4-doctor-wallet/doctor-wallet.reducer'
 import qaOrder from '../containers/3-1-questions-answers/qa-order.reducer'
 import telephoneConsult from '../containers/3-2-telephone-consult/telephone-consult.reducer'
 import userAppeal from '../containers/3-3-user-appeal/user-appeal.reducer'
-import hospitalManage from '../containers/2-2-hospital-manage/hospital-manage.reducer'
-import treatSituation from '../containers/1-2-treat-situation/treat-situation.reducer'
-import followApply from '../containers/1-4-follow-apply/follow-apply.reducer'
-import clinicDate from '../containers/2-3-clinic-date/clinic-date.reducer'
 
 import {
   APP, PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, QUESTIONS_ANSWERS, TELEPHONE_CONSULT, USER_APPEAL, HOSPITAL_MANAGE, TREAT_SITUATION,
   FOLLOW_APPLY, CLINIC_DATE, DOCTOR_WALLET
 } from '../core/constants/types'
-import doctorWallet from '../containers/2-4-doctor-wallet/doctor-wallet.reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -38,6 +38,7 @@ export default combineReducers({
   treatSituationList: wrapReducerState(data(TREAT_SITUATION.FETCH_LIST)),
 
   laboratorySheetList: wrapReducerState(data(LABORATORY_SHEET.FETCH_LIST)),
+  sheetCategoryList: wrapReducerState(data(LABORATORY_SHEET.FETCH_SHEET_CATEGORY_LIST)),
 
   followApply: wrapReducerState(followApply),
   followApplyList: wrapReducerState(data(FOLLOW_APPLY.FETCH_LIST)),
@@ -49,7 +50,7 @@ export default combineReducers({
   hospitalManageList: wrapReducerState(data(HOSPITAL_MANAGE.FETCH_LIST)),
 
   clinicDate: wrapReducerState(clinicDate),
-  clinicDateList: wrapReducerState(data(DOCTOR_WALLET.FETCH_LIST)),
+  clinicDateList: wrapReducerState(data(CLINIC_DATE.FETCH_LIST)),
 
   doctorWallet: wrapReducerState(doctorWallet),
   doctorWalletList: wrapReducerState(data(DOCTOR_WALLET.FETCH_LIST)),

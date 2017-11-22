@@ -6,21 +6,32 @@ import {connect} from 'react-redux'
 
 import {FixHeadList, FixHead, FixBody, FixRow} from '../../components/fix-head-list/'
 import PageCountNav from '../../components/nav/PageCountNav'
+import SearchBox from '../../components/search/SearchBox'
+import FilterItem from '../../components/query-filter/FilterItem'
+import FilterOptions from '../../components/query-filter/FilterOptions'
+import SelectedFilter from '../../components/query-filter/SelectedFilter'
+import SelectedItem from '../../components/query-filter/SelectedItem'
+import LookSheetDialog from './dialog/LookSheetDialog'
 
 import Data from '../../core/interface/Data'
+import {PatientSheet} from './interface/Sheet'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
+import {filters, SHEET_TYPE_MAPPER} from './laboratory-sheet.constant'
+import {handleListData, haveNotEmptyValue} from '../common/common-helper'
 import {fetchList} from './laboratory-sheet.action'
-import {handleListData} from '../common/common-helper'
 
 interface LaboratorySheetProps extends AppFunctionPage {
-  laboratorySheetList: Data<any>
+  laboratorySheetList: Data<PatientSheet[]>
 }
 
 class LaboratorySheet extends React.Component<LaboratorySheetProps> {
+  type: string
   state = {
-    searchKey: '',
     index: -1,
-    currentPage: 0
+    currentPage: 0,
+    showSheetCategoryList: true,
+    searchKey: '',
+    haveUnRecord: ''
   }
 
   toPage = (newPage?: number) => {
@@ -29,20 +40,70 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
       this.setState({currentPage: newPage})
     }
     this.props.fetchList({
-      start: 0,
-      limit: 20
+      start: newPage,
+      limit: 10
     })
+  }
+
+  refreshPage = () => {
+    this.toPage(0)
+  }
+
+  clearAllFilters = () => {
+
+  }
+
+  handleAmountClick = (index, type) => {
+    this.type = type
+    this.setState({index, showSheetCategoryList: true})
   }
 
   componentDidMount() {
     this.toPage(0)
   }
 
+  getAmount(amount, index, type) {
+    if (amount == 0) {
+      return <span>0</span>
+    }
+    return (
+      <a onClick={() => this.handleAmountClick(index, type)}>{amount}</a>
+    )
+  }
+
   render() {
     const {total, list, loading, loaded} = handleListData(this.props.laboratorySheetList)
+    const item: PatientSheet = list[this.state.index] || {}
 
     return (
-      <div className="app-function-page">
+      <div className="app-function-page laboratory-sheet">
+        {
+          this.state.showSheetCategoryList && (
+            <LookSheetDialog
+              mobile={item.mobile || '18920092760'}
+              type={this.type || '7'}
+              patient={item}
+              onExited={() => this.setState({showSheetCategoryList: false})}
+            />
+          )
+        }
+        <div className="toolbar">
+          <div></div>
+          <SearchBox
+            placeholder="输入手机号码、编号查询"
+            searchKey={this.state.searchKey}
+            onChange={v => this.setState({searchKey: v})}
+            onSearch={this.refreshPage}
+          />
+        </div>
+        <div className="query-filter">
+          <FilterItem label="是否有未录入">
+            <FilterOptions options={filters.haveUnRecord} value={this.state.haveUnRecord} onChange={v => this.setState({haveUnRecord: v})}/>
+          </FilterItem>
+          <SelectedFilter notEmpty={haveNotEmptyValue(this.state, ['haveUnRecord'])} clearAll={this.clearAllFilters} beginFilter={this.refreshPage}>
+            <SelectedItem label="是否有未录入" onReset={() => this.setState({haveUnRecord: ''})} value={this.state.haveUnRecord} options={filters.haveUnRecord}/>
+          </SelectedFilter>
+        </div>
         <FixHeadList total={total}>
           <FixHead>
             <FixHead.Item>患者编号</FixHead.Item>
@@ -59,22 +120,22 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
           </FixHead>
           <FixBody>
             {
-              list.map((item, index) => {
+              list.map((item: PatientSheet, index) => {
                 return (
-                  <FixRow key={item['assay_id']}
+                  <FixRow key={item.id}
                           onClick={() => this.setState({index})}
                           selected={this.state.index == index}>
-                    <FixRow.Item>{item['patient_code']}</FixRow.Item>
-                    <FixRow.Item>{item['user_account']}</FixRow.Item>
-                    <FixRow.Item>{item['real_name']}</FixRow.Item>
-                    <FixRow.Item>{item['remark']}</FixRow.Item>
-                    <FixRow.Item>{item['backend_upload_count']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_upload_count']}</FixRow.Item>
-                    <FixRow.Item>{item['patient_upload_count']}</FixRow.Item>
-                    <FixRow.Item>{item['is_input_count']}</FixRow.Item>
-                    <FixRow.Item>{item['is_no_input_count']}</FixRow.Item>
-                    <FixRow.Item>{item['invalid_count']}</FixRow.Item>
-                    <FixRow.Item>{item['delete_list_count']}</FixRow.Item>
+                    <FixRow.Item>{item.patientCode}</FixRow.Item>
+                    <FixRow.Item>{item.mobile}</FixRow.Item>
+                    <FixRow.Item>{item.username}</FixRow.Item>
+                    <FixRow.Item>{item.remark}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.consoleUpload, index, SHEET_TYPE_MAPPER.console)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.doctorUpload, index, SHEET_TYPE_MAPPER.doctor)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.patientUpload, index, SHEET_TYPE_MAPPER.patient)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.haveRecorded, index, SHEET_TYPE_MAPPER.recorded)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.unRecord, index, SHEET_TYPE_MAPPER.un_record)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.invalid, index, SHEET_TYPE_MAPPER.invalid)}</FixRow.Item>
+                    <FixRow.Item>{this.getAmount(item.deleted, index, SHEET_TYPE_MAPPER.deleted)}</FixRow.Item>
                   </FixRow>
                 )
               })
