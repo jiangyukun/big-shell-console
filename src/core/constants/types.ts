@@ -31,6 +31,7 @@ export const LABORATORY_SHEET = {
   FETCH_LIST: null,
   FETCH_SHEET_CATEGORY_LIST: null,
   UPDATE_REMARK: null,
+  UPDATE_SHEET_STATUS: null,
 }
 
 export const FOLLOW_APPLY = {

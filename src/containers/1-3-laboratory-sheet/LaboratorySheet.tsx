@@ -4,6 +4,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import Icon from '../../components/Icon'
 import {FixHeadList, FixHead, FixBody, FixRow} from '../../components/fix-head-list/'
 import PageCountNav from '../../components/nav/PageCountNav'
 import SearchBox from '../../components/search/SearchBox'
@@ -11,17 +12,22 @@ import FilterItem from '../../components/query-filter/FilterItem'
 import FilterOptions from '../../components/query-filter/FilterOptions'
 import SelectedFilter from '../../components/query-filter/SelectedFilter'
 import SelectedItem from '../../components/query-filter/SelectedItem'
+import EditRemark from '../../components/EditRemark'
 import LookSheetDialog from './dialog/LookSheetDialog'
 
 import Data from '../../core/interface/Data'
 import {PatientSheet} from './interface/Sheet'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
+import addCommonFunction from '../../core/hoc/addCommonFunction'
 import {filters, SHEET_TYPE_MAPPER} from './laboratory-sheet.constant'
 import {handleListData, haveNotEmptyValue} from '../common/common-helper'
-import {fetchList} from './laboratory-sheet.action'
+import {fetchList, updateSheetRemark} from './laboratory-sheet.action'
 
 interface LaboratorySheetProps extends AppFunctionPage {
   laboratorySheetList: Data<PatientSheet[]>
+  updateSheetStatusSuccess: boolean
+  updateSheetRemark: (id, remark) => void
+  updateRemarkSuccess: boolean
 }
 
 class LaboratorySheet extends React.Component<LaboratorySheetProps> {
@@ -30,6 +36,7 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
     index: -1,
     currentPage: 0,
     showSheetCategoryList: false,
+    showEditRemark: false,
     searchKey: '',
     haveUnRecord: ''
   }
@@ -58,6 +65,11 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
     this.setState({index, showSheetCategoryList: true})
   }
 
+  updateRemark = (newRemark) => {
+    let patientSheet: PatientSheet = handleListData(this.props.laboratorySheetList).list[this.state.index]
+    this.props.updateSheetRemark(patientSheet.id, newRemark)
+  }
+
   componentDidMount() {
     this.toPage(0)
   }
@@ -69,6 +81,16 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
     return (
       <a onClick={() => this.handleAmountClick(index, type)}>{amount}</a>
     )
+  }
+
+  componentWillReceiveProps(nextProps: LaboratorySheetProps) {
+    if (!this.props.updateSheetStatusSuccess && nextProps.updateSheetStatusSuccess) {
+      this.props.showSuccess('更新化验单状态成功！')
+    }
+    if (!this.props.updateRemarkSuccess && nextProps.updateRemarkSuccess) {
+      this.props.showSuccess('更新备注成功！')
+      this.toPage()
+    }
   }
 
   render() {
@@ -84,6 +106,16 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
               type={this.type}
               patient={item}
               onExited={() => this.setState({showSheetCategoryList: false})}
+            />
+          )
+        }
+        {
+          this.state.showEditRemark && (
+            <EditRemark
+              value={item.remark}
+              updateRemark={this.updateRemark}
+              updateRemarkSuccess={this.props.updateRemarkSuccess}
+              onExited={() => this.setState({showEditRemark: false})}
             />
           )
         }
@@ -128,7 +160,7 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
                     <FixRow.Item>{item.patientCode}</FixRow.Item>
                     <FixRow.Item>{item.mobile}</FixRow.Item>
                     <FixRow.Item>{item.username}</FixRow.Item>
-                    <FixRow.Item>{item.remark}</FixRow.Item>
+                    <FixRow.Item>{item.remark}<Icon type="remark" onClick={() => this.setState({showEditRemark: true})}/></FixRow.Item>
                     <FixRow.Item>{this.getAmount(item.consoleUpload, index, SHEET_TYPE_MAPPER.console)}</FixRow.Item>
                     <FixRow.Item>{this.getAmount(item.doctorUpload, index, SHEET_TYPE_MAPPER.doctor)}</FixRow.Item>
                     <FixRow.Item>{this.getAmount(item.patientUpload, index, SHEET_TYPE_MAPPER.patient)}</FixRow.Item>
@@ -150,8 +182,10 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
 
 function mapStateToProps(state) {
   return {
-    laboratorySheetList: state.laboratorySheetList
+    laboratorySheetList: state.laboratorySheetList,
+    updateRemarkSuccess: state.laboratorySheet.updateRemarkSuccess,
+    updateSheetStatusSuccess: state.laboratorySheet.updateSheetStatusSuccess
   }
 }
 
-export default connect(mapStateToProps, {fetchList})(LaboratorySheet)
+export default connect(mapStateToProps, {fetchList, updateSheetRemark})(addCommonFunction(LaboratorySheet))

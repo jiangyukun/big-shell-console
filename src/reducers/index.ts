@@ -10,6 +10,7 @@ import data from './data.reducer'
 import pageList from './page-list.reducer'
 
 import treatSituation from '../containers/1-2-treat-situation/treat-situation.reducer'
+import laboratorySheet from '../containers/1-3-laboratory-sheet/laboratory-sheet.reducer'
 import followApply from '../containers/1-4-follow-apply/follow-apply.reducer'
 import hospitalManage from '../containers/2-2-hospital-manage/hospital-manage.reducer'
 import clinicDate from '../containers/2-3-clinic-date/clinic-date.reducer'
@@ -37,6 +38,7 @@ export default combineReducers({
   treatSituation: wrapReducerState(treatSituation),
   treatSituationList: wrapReducerState(data(TREAT_SITUATION.FETCH_LIST)),
 
+  laboratorySheet: wrapReducerState(laboratorySheet),
   laboratorySheetList: wrapReducerState(data(LABORATORY_SHEET.FETCH_LIST)),
   sheetCategoryList: wrapReducerState(data(LABORATORY_SHEET.FETCH_SHEET_CATEGORY_LIST)),
 

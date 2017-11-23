@@ -13,7 +13,7 @@ import Button from '../../../components/button/Button'
 import Data from '../../../core/interface/Data'
 import {SheetItem, PatientSheet} from '../interface/Sheet'
 import {SHEET_TYPE_TEXT_MAPPER, SHEET_STATUS, SHEET_STATUS_TEXT} from '../laboratory-sheet.constant'
-import {fetchSheetCategoryList} from '../laboratory-sheet.action'
+import {fetchSheetCategoryList, updateSheetStatus} from '../laboratory-sheet.action'
 
 interface LookSheetDialogProps {
   mobile: string
@@ -21,6 +21,8 @@ interface LookSheetDialogProps {
   patient: PatientSheet
   fetchSheetCategoryList: (mobile, type) => void
   sheetCategoryList: Data<SheetItem[]>
+  updateSheetStatus: (sheetId, sheetStatus) => void
+  updateSheetStatusSuccess: boolean
   onExited: () => void
 }
 
@@ -59,6 +61,11 @@ class LookSheetDialog extends React.Component<LookSheetDialogProps> {
     this.setState({showUpdateSheetStatusConfirm: true})
   }
 
+  updateSheetStatus = () => {
+    let sheetId = this.props.sheetCategoryList.data[this.state.currentIndex].sheetId
+    this.props.updateSheetStatus(sheetId, this.sheetStatus)
+  }
+
   componentDidMount() {
     this.props.fetchSheetCategoryList(this.props.mobile, this.props.type)
   }
@@ -74,6 +81,9 @@ class LookSheetDialog extends React.Component<LookSheetDialogProps> {
       if (nextProps.sheetCategoryList.data.length > 0) {
         this.setState({currentIndex: 0, lastIndex: 0})
       }
+    }
+    if (!this.props.updateSheetStatusSuccess && nextProps.updateSheetStatusSuccess) {
+      this.close()
     }
   }
 
@@ -91,7 +101,7 @@ class LookSheetDialog extends React.Component<LookSheetDialogProps> {
             <Confirm
               message={`确定标为${SHEET_STATUS_TEXT[this.sheetStatus]}吗？`}
               onExited={() => this.setState({showUpdateSheetStatusConfirm: false})}
-              onConfirm={null}
+              onConfirm={this.updateSheetStatus}
             />
           )
         }
@@ -151,8 +161,9 @@ class LookSheetDialog extends React.Component<LookSheetDialogProps> {
 
 function mapStateToProps(state) {
   return {
-    sheetCategoryList: state.sheetCategoryList
+    sheetCategoryList: state.sheetCategoryList,
+    updateSheetStatusSuccess: state.laboratorySheet.updateSheetStatusSuccess
   }
 }
 
-export default connect(mapStateToProps, {fetchSheetCategoryList})(LookSheetDialog)
+export default connect(mapStateToProps, {fetchSheetCategoryList, updateSheetStatus})(LookSheetDialog)
