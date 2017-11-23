@@ -25,11 +25,17 @@ export function handleLaboratorySheetList(data): ListAndTotal<PatientSheet> {
 }
 
 export function handleSheetCategoryList(data): SheetItem[] {
-  return data.map(item => ({
-    sheetId: item['assay_id'],
-    // sheetUrl: item['assay_url'],
-    sheetUrl: 'http://mobi.vongihealth.com:85/Shell/pictures/13560084607/171108032354148114.png',
-    sheetStatus: item['assay_input_status'],
-    sheetUploadDateTime: item['assay_upload_time'],
-  }))
+  return data.map((item, index) => {
+    let url = 'https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=249917700,3825414431&fm=85&s=5DCAAC5604B0CC2128786A720300C076'
+    if (index % 2 == 0) {
+      url = 'http://mobi.vongihealth.com:85/Shell/pictures/13560084607/171108032354148114.png'
+    }
+    return {
+      sheetId: item['assay_id'],
+      sheetUrl: item['assay_url'],
+      // sheetUrl: url,
+      sheetStatus: item['assay_input_status'],
+      sheetUploadDateTime: item['assay_upload_time'],
+    }
+  })
 }

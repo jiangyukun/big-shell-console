@@ -18,14 +18,14 @@
         background-color: #3DB8C1;
     }
 
-    &[disabled] {
-        cursor: not-allowed;
-        background: #c0c0c0;
-        color: #eee;
-    }
-
     & ~ button {
         margin-left: 10px;
     }
 }
 
+button[disabled] {
+    cursor: not-allowed !important;
+    background: #c0c0c0 !important;
+    border: none !important;
+    color: #aaa !important;
+}

@@ -27,3 +27,15 @@ export const SHEET_TYPE_TEXT_MAPPER = {
   6: '无效',
   7: '已删除'
 }
+
+export const SHEET_STATUS = {
+  un_record: 1,
+  recorded: 2,
+  invalid: 3
+}
+
+export const SHEET_STATUS_TEXT = {
+  1: '未录入',
+  2: '已录入',
+  3: '无效'
+}

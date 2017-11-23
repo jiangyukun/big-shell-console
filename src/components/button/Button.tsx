@@ -9,12 +9,22 @@ interface ButtonProps {
   onClick?: () => void
   type?: string
   className?: string
+  theme?: string
 }
 
 class Button extends React.Component<ButtonProps> {
+  static defaultProps = {
+    type: '',
+    className: ''
+  }
+
   render() {
+    let className = classnames('button', this.props.type, this.props.className)
+    if (this.props.theme) {
+      className = 'button__' + this.props.theme
+    }
     return (
-      <button className={classnames('button', this.props.type || '', this.props.className)}
+      <button className={className}
               onClick={this.props.onClick} disabled={this.props.disabled}>
         {this.props.children}
       </button>

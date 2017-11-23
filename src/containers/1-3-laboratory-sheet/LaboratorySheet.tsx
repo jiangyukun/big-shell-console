@@ -29,7 +29,7 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
   state = {
     index: -1,
     currentPage: 0,
-    showSheetCategoryList: true,
+    showSheetCategoryList: false,
     searchKey: '',
     haveUnRecord: ''
   }
@@ -80,8 +80,8 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
         {
           this.state.showSheetCategoryList && (
             <LookSheetDialog
-              mobile={item.mobile || '18920092760'}
-              type={this.type || '7'}
+              mobile={item.mobile}
+              type={this.type}
               patient={item}
               onExited={() => this.setState({showSheetCategoryList: false})}
             />

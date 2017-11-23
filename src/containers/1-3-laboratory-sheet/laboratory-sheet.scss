@@ -5,3 +5,37 @@
         text-decoration: underline;
     }
 }
+
+.look-sheet-dialog {
+    .picture-panel {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        height: 100%;
+        .picture-container {
+            height: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+    }
+
+    .button__to-sheet-item {
+        width: 30px;
+        padding: 10px 5px;
+        border: 1px solid #b9def0;
+        border-radius: 4px;
+        background: #fff;
+        i {
+            color: #000;
+        }
+        &[disabled] i {
+            color: #aaa;
+        }
+    }
+    img {
+        transition: all .5s;
+    }
+}
