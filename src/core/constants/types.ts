@@ -42,12 +42,15 @@ export const FOLLOW_APPLY = {
 /* 医生 */
 export const DOCTOR_AUDIT = {
   FETCH_LIST: null,
-
+  UPDATE_REMARK: null,
+  FETCH_POSITION_LIST: null,
+  UPDATE_DOCTOR: null,
 }
 
 export const HOSPITAL_MANAGE = {
   FETCH_LIST: null,
   UPDATE_REMARK: null,
+  ADD_HOSPITAL: null,
 }
 
 export const CLINIC_DATE = {

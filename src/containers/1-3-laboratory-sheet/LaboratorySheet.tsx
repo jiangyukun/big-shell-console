@@ -48,7 +48,9 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
     }
     this.props.fetchList({
       start: newPage,
-      limit: 10
+      limit: 10,
+      "key_words": this.state.searchKey,
+      "is_have_no_input": this.state.haveUnRecord
     })
   }
 
@@ -57,7 +59,7 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
   }
 
   clearAllFilters = () => {
-
+    this.setState({haveUnRecord: ''})
   }
 
   handleAmountClick = (index, type) => {
@@ -79,7 +81,7 @@ class LaboratorySheet extends React.Component<LaboratorySheetProps> {
       return <span>0</span>
     }
     return (
-      <a onClick={() => this.handleAmountClick(index, type)}>{amount}</a>
+      <a className="amount" onClick={() => this.handleAmountClick(index, type)}>{amount}</a>
     )
   }
 

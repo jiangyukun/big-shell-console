@@ -40,8 +40,7 @@ class ClinicDate extends React.Component<ClinicDateProps> {
 
     searchKey: '',
     hospitalId: '',
-    hospitalText: '',
-    department: ''
+    hospitalText: ''
   }
 
   toPage = (newPage?: number) => {
@@ -54,18 +53,12 @@ class ClinicDate extends React.Component<ClinicDateProps> {
       "rows": 10,
       "doctor_phone": this.state.searchKey,
       "hospital_id": this.state.hospitalId,
-      "hospital_name": this.state.hospitalText,
-
+      "hospital_name": this.state.hospitalText
     })
   }
 
   clearAllFilter = () => {
-    this.setState({
-      searchKey: '',
-      takeMedicine: '',
-      week: '',
-      patientConditionStatus: ''
-    })
+    this.setState({hospitalId: '', hospitalText: ''})
   }
 
   updateRemark = (newRemark) => {
@@ -113,17 +106,13 @@ class ClinicDate extends React.Component<ClinicDateProps> {
               text={this.state.hospitalText} onTextChange={v => this.setState({hospitalText: v})}
             />
           </FilterItem>
-          <FilterItem label="医院" style={{width: '500px'}}>
-            <FilterOptions options={filters.department} value={this.state.department} onChange={v => this.setState({department: v})}/>
-          </FilterItem>
-
           <SelectedFilter
             notEmpty={haveNotEmptyValue(this.state, [])}
             beginFilter={() => this.toPage(0)}
             clearAll={this.clearAllFilter}
           >
             <SelectedItem
-              label="科室" value={this.state.department} options={filters.department}
+              label="医院" value={this.state.hospitalId} options={this.props.hospitalList.data || []}
               onReset={() => this.setState({department: ''})}
             />
 

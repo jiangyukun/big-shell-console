@@ -26,6 +26,8 @@ import {handleListData, getStartEndDateStr, haveNotEmptyValue, getProvinceCityTe
 import {getDateStr} from '../../core/utils/dateUtils'
 import {fetchList, updateRemark} from './hospital-manage.action'
 import {fetchProvinceList, fetchCityList, fetchHospitalList} from '../app.action'
+import AddHospitalDialog from './dialog/AddHospitalDialog'
+import {ReducerType} from '../../reducers/index'
 
 interface HospitalManageProps extends AppFunctionPage {
   fetchProvinceList: () => void
@@ -37,6 +39,7 @@ interface HospitalManageProps extends AppFunctionPage {
   hospitalManageList: Data<any>
   updateRemark: any
   updateRemarkSuccess: boolean
+  addHospitalSuccess: boolean
 }
 
 class HospitalManage extends React.Component<HospitalManageProps> {
@@ -44,6 +47,8 @@ class HospitalManage extends React.Component<HospitalManageProps> {
     currentPage: 0,
     index: -1,
     showEditRemark: false,
+    showAdd: false,
+    showEdit: false,
 
     searchKey: '',
     createStartDate: null,
@@ -106,6 +111,10 @@ class HospitalManage extends React.Component<HospitalManageProps> {
       this.props.showSuccess('修改备注成功！')
       this.toPage()
     }
+    if (!this.props.addHospitalSuccess && nextProps.addHospitalSuccess) {
+      this.props.showSuccess('添加医院成功！')
+      this.toPage()
+    }
   }
 
   render() {
@@ -118,6 +127,13 @@ class HospitalManage extends React.Component<HospitalManageProps> {
     return (
       <div className="app-function-page">
         {
+          this.state.showAdd && (
+            <AddHospitalDialog
+              onExited={() => this.setState({showAdd: false})}
+            />
+          )
+        }
+        {
           this.state.showEditRemark && (
             <EditRemark
               value={item['hospital_remark']}
@@ -126,7 +142,8 @@ class HospitalManage extends React.Component<HospitalManageProps> {
         }
         <div className="toolbar">
           <div>
-            <Button disabled={this.state.index == -1} onClick={() => this.setState({showConsultDetail: true})}>查看</Button>
+            <Button onClick={() => this.setState({showAdd: true})}>新增</Button>
+            <Button disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>查看</Button>
           </div>
           <div>
             <SearchBox label="患者" placeholder="输入手机号码、编号查询"
@@ -196,8 +213,7 @@ class HospitalManage extends React.Component<HospitalManageProps> {
                     <FixRow.Item>{item['hospital_dimension']}</FixRow.Item>
                     <FixRow.Item>{item['create_time']}</FixRow.Item>
                     <FixRow.Item>
-                      {item['hospital_remark']}
-                      <div><Icon type="remark" onClick={() => this.setState({showEditRemark: true})}/></div>
+                      {item['hospital_remark']}<Icon type="remark" onClick={() => this.setState({showEditRemark: true})}/>
                     </FixRow.Item>
                     <FixRow.Item>{getYesNo(item['is_hide'])}</FixRow.Item>
                   </FixRow>
@@ -212,13 +228,14 @@ class HospitalManage extends React.Component<HospitalManageProps> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: ReducerType) {
   return {
     provinceList: state.provinceList,
     cityList: state.cityList,
     hospitalList: state.hospitalList,
     hospitalManageList: state.hospitalManageList,
     updateRemarkSuccess: state.hospitalManage.updateRemarkSuccess,
+    addHospitalSuccess: state.hospitalManage.addHospitalSuccess,
   }
 }
 

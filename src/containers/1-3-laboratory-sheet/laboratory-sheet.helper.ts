@@ -8,7 +8,7 @@ export function handleLaboratorySheetList(data): ListAndTotal<PatientSheet> {
   return {
     total: data['totalCount'],
     list: data['list'].map(item => ({
-      id: item['assay_id'],
+      id: item['patient_info_id'],
       patientCode: item['patient_code'],
       mobile: item['user_account'],
       username: item['real_name'],

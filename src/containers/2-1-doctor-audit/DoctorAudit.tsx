@@ -6,21 +6,33 @@ import {connect} from 'react-redux'
 
 import {FixHeadList, FixHead, FixBody, FixRow} from '../../components/fix-head-list/'
 import PageCountNav from '../../components/nav/PageCountNav'
+import SearchBox from '../../components/search/SearchBox'
+import Button from '../../components/button/Button'
+import UpdateDoctorDialog from './dialog/UpdateDoctorDialog'
 
 import Data from '../../core/interface/Data'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
-import {fetchList} from './doctor-audit.action'
+import {ReducerType} from '../../reducers/index'
 import {handleListData} from '../common/common-helper'
+import {fetchList, updateRemark} from './doctor-audit.action'
+import {DoctorAuditItem} from './interface/DoctorAudit'
+import Icon from '../../components/Icon'
+import EditRemark from '../../components/EditRemark'
+import addCommonFunction from '../../core/hoc/addCommonFunction'
 
 interface DoctorAuditProps extends AppFunctionPage {
   doctorAuditList: Data<any>
+  updateRemark: (id, remark) => void
+  updateRemarkSuccess: boolean
 }
 
 class DoctorAudit extends React.Component<DoctorAuditProps> {
   state = {
     searchKey: '',
     index: -1,
-    currentPage: 0
+    currentPage: 0,
+    showEdit: false,
+    showEditRemark: false
   }
 
   toPage = (newPage?: number) => {
@@ -31,19 +43,65 @@ class DoctorAudit extends React.Component<DoctorAuditProps> {
     this.props.fetchList(newPage, 10, this.state.searchKey)
   }
 
+  refreshPage = () => {
+    this.toPage(0)
+  }
+
+  updateRemark = (newRemark) => {
+    let id = handleListData(this.props.doctorAuditList).list[this.state.index].id
+    this.props.updateRemark(id, newRemark)
+  }
+
   componentDidMount() {
     this.toPage(0)
   }
 
+  componentWillReceiveProps(nextProps: DoctorAuditProps) {
+    if (!this.props.updateRemarkSuccess && nextProps.updateRemarkSuccess) {
+      this.props.showSuccess('更新备注成功！')
+      this.toPage()
+    }
+  }
+
   render() {
     const {total, list, loading, loaded} = handleListData(this.props.doctorAuditList)
+    const item: DoctorAuditItem = list[this.state.index] || {}
 
     return (
       <div className="app-function-page">
+        {
+          this.state.showEdit && (
+            <UpdateDoctorDialog
+              doctor={item}
+              onExited={() => this.setState({showEdit: false})}
+            />
+          )
+        }
+        {
+          this.state.showEditRemark && (
+            <EditRemark
+              value={item.remark}
+              updateRemark={this.updateRemark}
+              updateRemarkSuccess={this.props.updateRemarkSuccess}
+              onExited={() => this.setState({showEditRemark: false})}
+            />
+          )
+        }
+        <div className="toolbar">
+          <div>
+            <Button onClick={() => this.setState({showEdit: true})} disabled={this.state.index == -1}>查看/修改</Button>
+          </div>
+          <SearchBox
+            placeholder="输入手机号码、编号查询"
+            searchKey={this.state.searchKey}
+            onChange={v => this.setState({searchKey: v})}
+            onSearch={this.refreshPage}
+          />
+        </div>
         <FixHeadList total={total}>
           <FixHead>
             <FixHead.Item>手机号码</FixHead.Item>
-            <FixHead.Item> 医生姓名</FixHead.Item>
+            <FixHead.Item>医生姓名</FixHead.Item>
             <FixHead.Item>医院</FixHead.Item>
             <FixHead.Item>职称</FixHead.Item>
             <FixHead.Item>照片</FixHead.Item>
@@ -55,21 +113,21 @@ class DoctorAudit extends React.Component<DoctorAuditProps> {
           </FixHead>
           <FixBody>
             {
-              list.map((item, index) => {
+              list.map((item: DoctorAuditItem, index) => {
                 return (
-                  <FixRow key={item['doctor_info_id']}
+                  <FixRow key={item.id}
                           onClick={() => this.setState({index})}
                           selected={this.state.index == index}>
-                    <FixRow.Item>{item['doctor_phone']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_name']}</FixRow.Item>
-                    <FixRow.Item>{item['hospital_name']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_title_name']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_photo_url']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_license_url']}</FixRow.Item>
-                    <FixRow.Item>{item['doctor_specialty']}</FixRow.Item>
-                    <FixRow.Item>{item['check_status']}</FixRow.Item>
-                    <FixRow.Item>{item['regrist_time']}</FixRow.Item>
-                    <FixRow.Item>{item['remark']}</FixRow.Item>
+                    <FixRow.Item>{item.mobile}</FixRow.Item>
+                    <FixRow.Item>{item.doctorName}</FixRow.Item>
+                    <FixRow.Item>{item.hospital}</FixRow.Item>
+                    <FixRow.Item>{item.position}</FixRow.Item>
+                    <FixRow.Item>{item.pictureUrl}</FixRow.Item>
+                    <FixRow.Item>{item.codeNumber}</FixRow.Item>
+                    <FixRow.Item>{item.speciality}</FixRow.Item>
+                    <FixRow.Item>{item.auditStatus}</FixRow.Item>
+                    <FixRow.Item>{item.createDateTime}</FixRow.Item>
+                    <FixRow.Item>{item.remark}<Icon type="remark" onClick={() => this.setState({showEditRemark: true})}/></FixRow.Item>
                   </FixRow>
                 )
               })
@@ -82,10 +140,12 @@ class DoctorAudit extends React.Component<DoctorAuditProps> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: ReducerType) {
   return {
-    doctorAuditList: state.doctorAuditList
+    doctorAuditList: state.doctorAuditList,
+    positionList: state.positionList,
+    updateRemarkSuccess: state.doctorAudit.updateRemarkSuccess
   }
 }
 
-export default connect(mapStateToProps, {fetchList})(DoctorAudit)
+export default connect(mapStateToProps, {fetchList, updateRemark})(addCommonFunction(DoctorAudit))

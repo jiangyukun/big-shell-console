@@ -8,7 +8,7 @@ import {flagState} from '../common/common-helper'
 
 const initValue = {
   updateRemarkSuccess: false,
-
+  addHospitalSuccess: false
 }
 
 export default function hospitalManage(iState = fromJS(initValue), action) {
@@ -16,6 +16,7 @@ export default function hospitalManage(iState = fromJS(initValue), action) {
 
   nextIState = flagState(nextIState, action)
     .handle(HOSPITAL_MANAGE.UPDATE_REMARK, 'updateRemarkSuccess')
+    .handle(HOSPITAL_MANAGE.ADD_HOSPITAL, 'addHospitalSuccess')
     .get()
 
   return nextIState

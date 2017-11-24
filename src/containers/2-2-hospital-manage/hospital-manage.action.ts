@@ -28,3 +28,12 @@ export function updateRemark(hospitalId, remark) {
     }
   }
 }
+
+export function addHospital(options) {
+  return {
+    [THREE_PHASE]: {
+      type: HOSPITAL_MANAGE.ADD_HOSPITAL,
+      http: () => _post(urlPrefix + '/v1/hospital/add', {body: options})
+    }
+  }
+}

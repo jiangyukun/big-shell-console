@@ -9,23 +9,37 @@ import FilterOptions from '../../components/query-filter/FilterOptions'
 import DateInterval from '../../components/query-filter/extends/DateInterval'
 import {FixHeadList, FixHead, FixBody, FixRow} from '../../components/fix-head-list/'
 import PageCountNav from '../../components/nav/PageCountNav'
+import ProvinceCity from '../../components/query-filter/extends/ProvinceCity'
 
+import Data from '../../core/interface/Data'
+import ValueText from '../../core/interface/ValueText'
 import AppFunctionPage from '../../core/interface/AppFunctionPage'
 import {filters} from './patient-info'
-import {fetchList} from './patient-info.action'
-import Data from '../../core/interface/Data'
 import {handleListData} from '../common/common-helper'
+import {fetchProvinceList, fetchCityList} from '../app.action'
+import {fetchList} from './patient-info.action'
+import {ReducerType} from '../../reducers/index'
 
 interface PatientInfoProps extends AppFunctionPage {
+  fetchProvinceList: () => void
+  fetchCityList: (provinceId) => void
   patientInfoList: Data<any>
+  provinceList: Data<ValueText[]>
+  cityList: Data<ValueText[]>
 }
 
 class PatientInfo extends React.Component<PatientInfoProps> {
   state = {
-    sex: '',
-    area: '',
     index: -1,
-    currentPage: 0
+    currentPage: 0,
+
+    sex: '',
+    province: '',
+    city: '',
+    createStartDate: null,
+    createEndDate: null,
+    lastLoginStartDate: null,
+    lastLoginEndDate: null,
   }
 
   toPage = (newPage?: number) => {
@@ -39,8 +53,18 @@ class PatientInfo extends React.Component<PatientInfoProps> {
     })
   }
 
+  handleProvinceChange = (newProvinceId) => {
+    if (newProvinceId) {
+      this.props.fetchCityList(newProvinceId)
+    }
+    this.setState({province: newProvinceId, city: ''})
+  }
+
   componentDidMount() {
     this.toPage(0)
+    if (!this.props.provinceList.loaded) {
+      this.props.fetchProvinceList()
+    }
   }
 
   render() {
@@ -49,16 +73,17 @@ class PatientInfo extends React.Component<PatientInfoProps> {
     return (
       <div className="app-function-page">
         <div className="query-filter">
-          <FilterItem label="性别" size="big">
+          <FilterItem label="性别">
             <FilterOptions options={filters.sex} value={this.state.sex} onChange={v => this.setState({sex: v})}/>
           </FilterItem>
-          <FilterItem label="所在地区" size="big">
-            <FilterOptions
-              useSelect={true}
-              options={filters.provinces} value={this.state.area} onChange={v => this.setState({area: v})}
+          <FilterItem label="所在地区">
+            <ProvinceCity
+              province={this.state.province} city={this.state.city}
+              provinceList={this.props.provinceList.data || []} cityList={this.props.cityList.data || []}
+              onProvinceChange={this.handleProvinceChange} onCityChange={v => this.setState({city: v})}
             />
           </FilterItem>
-          <FilterItem label="注册日期" size="big">
+          <FilterItem label="注册日期">
             <DateInterval
               startDate={null}
               endDate={null}
@@ -66,7 +91,7 @@ class PatientInfo extends React.Component<PatientInfoProps> {
               onEndDateChange={() => null}
             />
           </FilterItem>
-          <FilterItem label="最近登录日期" size="big">
+          <FilterItem label="最近登录日期">
             <DateInterval
               startDate={null}
               endDate={null}
@@ -126,10 +151,12 @@ class PatientInfo extends React.Component<PatientInfoProps> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: ReducerType) {
   return {
-    patientInfoList: state.patientInfoList
+    patientInfoList: state.patientInfoList,
+    provinceList: state.provinceList,
+    cityList: state.cityList,
   }
 }
 
-export default connect(mapStateToProps, {fetchList})(PatientInfo)
+export default connect(mapStateToProps, {fetchProvinceList, fetchCityList, fetchList})(PatientInfo)

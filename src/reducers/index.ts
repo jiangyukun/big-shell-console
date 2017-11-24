@@ -23,6 +23,7 @@ import {
   APP, PATIENT_INFO, LABORATORY_SHEET, DOCTOR_AUDIT, QUESTIONS_ANSWERS, TELEPHONE_CONSULT, USER_APPEAL, HOSPITAL_MANAGE, TREAT_SITUATION,
   FOLLOW_APPLY, CLINIC_DATE, DOCTOR_WALLET
 } from '../core/constants/types'
+import doctorAudit from '../containers/2-1-doctor-audit/doctor-audit.reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -31,6 +32,7 @@ export default combineReducers({
   provinceList: wrapReducerState(data(APP.FETCH_PROVINCE_LIST)),
   cityList: wrapReducerState(data(APP.FETCH_CITY_LIST)),
   hospitalList: wrapReducerState(data(APP.FETCH_HOSPITAL_LIST)),
+  positionList: wrapReducerState(data(DOCTOR_AUDIT.FETCH_POSITION_LIST)),
 
   /*1 患者*/
   patientInfoList: wrapReducerState(data(PATIENT_INFO.FETCH_LIST)),
@@ -46,6 +48,7 @@ export default combineReducers({
   followApplyList: wrapReducerState(data(FOLLOW_APPLY.FETCH_LIST)),
 
   /*2 医生*/
+  doctorAudit: wrapReducerState(doctorAudit),
   doctorAuditList: wrapReducerState(data(DOCTOR_AUDIT.FETCH_LIST)),
 
   hospitalManage: wrapReducerState(hospitalManage),
@@ -73,4 +76,55 @@ export default combineReducers({
   appealTypeList: wrapReducerState(data(USER_APPEAL.FETCH_APPEAL_TYPE_LIST)),
 
   /*4*/
-})
+} as ReducerType)
+
+export type ReducerType = {
+  router: any,
+  message: any
+
+  provinceList: any
+  cityList: any
+  hospitalList: any
+  positionList: any
+
+  /*1 患者*/
+  patientInfoList: any
+
+  treatSituation: any
+  treatSituationList: any
+
+  laboratorySheet: any
+  laboratorySheetList: any
+  sheetCategoryList: any
+
+  followApply: any
+  followApplyList: any
+
+  /*2 医生*/
+  doctorAudit: any
+  doctorAuditList: any
+
+  hospitalManage: any
+  hospitalManageList: any
+
+  clinicDate: any
+  clinicDateList: any
+
+  doctorWallet: any
+  doctorWalletList: any
+
+  /*3 订单*/
+  qaOrder: any
+  questionAnswerList: any
+  orderOperationList: any
+  orderDetail: any
+
+  telephoneConsult: any
+  telephoneConsultList: any
+  telephoneConsultDetail: any
+
+  userAppeal: any
+  userAppealList: any
+  appealTypeList: any
+
+}
