@@ -12,23 +12,25 @@ import Confirm from 'app-core/common/Confirm'
 import ConfirmOrClose from 'app-core/common/ConfirmOrClose'
 
 import {ReducerType} from '../../../reducers/index'
-import {addHospital} from '../hospital-manage.action'
 import Label from '../../../components/element/Label'
-import {fetchCityList} from '../../app.action'
 import Data from '../../../core/interface/Data'
 import ValueText from '../../../core/interface/ValueText'
+import {HospitalItem} from '../interface/Hospital'
+import {fetchCityList} from '../../app.action'
+import {updateHospital} from '../hospital-manage.action'
 
-interface AddHospitalDialogProps {
-
+interface UpdateHospitalDialogProps {
+  hospital: HospitalItem
   provinceList: Data<ValueText[]>
   fetchCityList: (provinceId) => void
   cityList: Data<ValueText[]>
-  addHospital: (options) => void
-  addHospitalSuccess: boolean
+  updateHospital: (options) => void
+  updateHospitalSuccess: boolean
   onExited: () => void
 }
 
-class AddHospitalDialog extends React.Component<AddHospitalDialogProps> {
+class UpdateHospitalDialog extends React.Component<UpdateHospitalDialogProps> {
+  hospital_id: string
   state = {
     show: true,
     showAddConfirm: false,
@@ -52,8 +54,9 @@ class AddHospitalDialog extends React.Component<AddHospitalDialogProps> {
     this.setState({provinceId, cityId: ''})
   }
 
-  addHospital = () => {
-    this.props.addHospital({
+  updateHospital = () => {
+    this.props.updateHospital({
+      "hospital_id": this.hospital_id,
       "hospital_name": this.state.hospitalName,
       "hospital_province": this.state.provinceId,
       "hospital_city": this.state.cityId,
@@ -63,25 +66,42 @@ class AddHospitalDialog extends React.Component<AddHospitalDialogProps> {
     })
   }
 
-  componentWillReceiveProps(nextProps: AddHospitalDialogProps) {
-    if (!this.props.addHospitalSuccess && nextProps.addHospitalSuccess) {
+  componentWillMount() {
+    const {
+      create_time, hospital_city, hospital_city_id, hospital_dimension,
+      hospital_id, hospital_longitude, hospital_name,
+      hospital_province, hospital_province_id, hospital_remark, is_hide
+    } = this.props.hospital
+    this.hospital_id = hospital_id
+    this.setState({
+      hospitalName: hospital_name,
+      provinceId: hospital_province_id,
+      cityId: hospital_city_id,
+      longitude: hospital_longitude,
+      latitude: hospital_dimension,
+      remark: hospital_remark
+    })
+  }
+
+  componentWillReceiveProps(nextProps: UpdateHospitalDialogProps) {
+    if (!this.props.updateHospitalSuccess && nextProps.updateHospitalSuccess) {
       this.close()
     }
   }
 
   render() {
     return (
-      <Modal className="add-hospital-dialog" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
+      <Modal className="update-hospital-dialog" show={this.state.show} onHide={this.close} onExited={this.props.onExited}>
         {
           this.state.showAddConfirm && (
-            <Confirm message="确定添加医院吗？"
+            <Confirm message="确定更新医院信息吗？"
                      onExited={() => this.setState({showAddConfirm: false})}
-                     onConfirm={this.addHospital}/>
+                     onConfirm={this.updateHospital}/>
           )
         }
 
         <Modal.Header closeButton={true}>
-          <Modal.Title>新增医院</Modal.Title>
+          <Modal.Title>更新医院</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FlexDiv>
@@ -166,8 +186,8 @@ function mapStateToProps(state: ReducerType) {
   return {
     provinceList: state.provinceList,
     cityList: state.cityList,
-    addHospitalSuccess: state.hospitalManage.addHospitalSuccess
+    updateHospitalSuccess: state.hospitalManage.updateHospitalSuccess
   }
 }
 
-export default connect(mapStateToProps, {fetchCityList, addHospital})(AddHospitalDialog)
+export default connect(mapStateToProps, {fetchCityList, updateHospital})(UpdateHospitalDialog)

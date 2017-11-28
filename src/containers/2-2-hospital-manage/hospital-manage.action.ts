@@ -37,3 +37,12 @@ export function addHospital(options) {
     }
   }
 }
+
+export function updateHospital(options) {
+  return {
+    [THREE_PHASE]: {
+      type: HOSPITAL_MANAGE.UPDATE_HOSPITAL,
+      http: () => _post(urlPrefix + '/v1/hospital/update', {body: options})
+    }
+  }
+}

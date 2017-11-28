@@ -51,6 +51,7 @@ export const HOSPITAL_MANAGE = {
   FETCH_LIST: null,
   UPDATE_REMARK: null,
   ADD_HOSPITAL: null,
+  UPDATE_HOSPITAL: null,
 }
 
 export const CLINIC_DATE = {

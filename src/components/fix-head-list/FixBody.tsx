@@ -19,8 +19,10 @@ class FixBody extends React.Component {
 
   refreshScrollState = () => {
     setTimeout(() => {
-      const {clientHeight, scrollHeight} = this.body
-      this.context.onLayoutUpdate('verticalScroll', scrollHeight > clientHeight)
+      if (this.body) {
+        const {clientHeight, scrollHeight} = this.body
+        this.context.onLayoutUpdate('verticalScroll', scrollHeight > clientHeight)
+      }
     }, 0)
   }
 

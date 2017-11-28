@@ -16,6 +16,8 @@ import EditRemark from '../../components/EditRemark'
 import SelectedItem from '../../components/query-filter/SelectedItem'
 import ProvinceCity from '../../components/query-filter/extends/ProvinceCity'
 import FilterOptions from '../../components/query-filter/FilterOptions'
+import AddHospitalDialog from './dialog/AddHospitalDialog'
+import UpdateHospitalDialog from './dialog/UpdateHospitalDialog'
 
 import Data from '../../core/interface/Data'
 import ValueText from '../../core/interface/ValueText'
@@ -26,7 +28,6 @@ import {handleListData, getStartEndDateStr, haveNotEmptyValue, getProvinceCityTe
 import {getDateStr} from '../../core/utils/dateUtils'
 import {fetchList, updateRemark} from './hospital-manage.action'
 import {fetchProvinceList, fetchCityList, fetchHospitalList} from '../app.action'
-import AddHospitalDialog from './dialog/AddHospitalDialog'
 import {ReducerType} from '../../reducers/index'
 
 interface HospitalManageProps extends AppFunctionPage {
@@ -129,6 +130,14 @@ class HospitalManage extends React.Component<HospitalManageProps> {
         {
           this.state.showAdd && (
             <AddHospitalDialog
+              onExited={() => this.setState({showAdd: false})}
+            />
+          )
+        }
+        {
+          this.state.showEdit && (
+            <UpdateHospitalDialog
+              hospital={item}
               onExited={() => this.setState({showAdd: false})}
             />
           )
